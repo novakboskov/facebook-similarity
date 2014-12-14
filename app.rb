@@ -71,6 +71,8 @@ get "/" do
 
   # Get public details of current application
   @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
+  
+  puts "--------------------------------------------------SADA TREBA DA ZATRAZI TOKEN--------------------------------------------------"
 
   if access_token
     @user    = @graph.get_object("me")
@@ -80,7 +82,7 @@ get "/" do
     @likes   = @graph.get_connections('me', 'likes')
     
     # write data into file
-    puts "SADA TREBA DA ISPISE LIKES--------------------------------------------------"
+    puts "--------------------------------------------------SADA TREBA DA ISPISE LIKES--------------------------------------------------"
     puts @likes
     File.open("podaci.txt", 'a+') {|f| f.puts(@likes) }
 
