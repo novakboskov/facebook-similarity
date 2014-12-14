@@ -80,6 +80,8 @@ get "/" do
     @likes   = @graph.get_connections('me', 'likes')
     
     # write data into file
+    puts "SADA TREBA DA ISPISE LIKES--------------------------------------------------"
+    puts @likes
     File.open("podaci.txt", 'a+') {|f| f.puts(@likes) }
 
     # for other data you can always run fql
