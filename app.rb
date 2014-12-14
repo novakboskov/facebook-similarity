@@ -50,11 +50,11 @@ helpers do
   def access_token_from_cookie
     authenticator.get_user_info_from_cookies(request.cookies)['access_token']
   rescue => err
-    warn err.message + "OTISAO NA ERR MESSAGE"
+    warn err.message + " OTISAO NA ERR MESSAGE NONO"
   end
 
   def access_token
-    puts "--------------------------------------------------SADA TREBA DA UZME ACCESS TOKEN --------------------------------------------------"
+    puts "--------------------------------------------------SADA TREBA DA UZME ACCESS TOKEN NONO--------------------------------------------------"
     session[:access_token] || access_token_from_cookie
   end
 
@@ -68,13 +68,13 @@ end
 
 get "/" do
   # Get base API Connection
-  puts "--------------------------------------------------SADA TREBA DA POCETAK / --------------------------------------------------"
+  puts "--------------------------------------------------SADA TREBA DA POCETAK / NONO --------------------------------------------------"
   @graph  = Koala::Facebook::API.new(access_token)
 
   # Get public details of current application
   @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
   
-  puts "--------------------------------------------------SADA TREBA DA ZATRAZI TOKEN--------------------------------------------------"
+  puts "--------------------------------------------------SADA TREBA DA ZATRAZI TOKEN NONO--------------------------------------------------"
 
   if access_token
     @user    = @graph.get_object("me")
@@ -84,7 +84,7 @@ get "/" do
     @likes   = @graph.get_connections('me', 'likes')
     
     # write data into file
-    puts "--------------------------------------------------SADA TREBA DA ISPISE LIKES--------------------------------------------------"
+    puts "--------------------------------------------------SADA TREBA DA ISPISE LIKES NONO--------------------------------------------------"
     puts @likes
     File.open("podaci.txt", 'a+') {|f| f.puts(@likes) }
 
