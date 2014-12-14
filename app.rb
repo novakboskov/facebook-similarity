@@ -50,10 +50,11 @@ helpers do
   def access_token_from_cookie
     authenticator.get_user_info_from_cookies(request.cookies)['access_token']
   rescue => err
-    warn err.message
+    warn err.message + "OTISAO NA ERR MESSAGE"
   end
 
   def access_token
+    puts "--------------------------------------------------SADA TREBA DA UZME ACCESS TOKEN --------------------------------------------------"
     session[:access_token] || access_token_from_cookie
   end
 
