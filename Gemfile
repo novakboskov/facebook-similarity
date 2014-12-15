@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-# odkomentarisi za deploy on heroku
+# verzija rubija iz template-a
 #ruby '1.9.3'
 ruby '2.1.2'
 
