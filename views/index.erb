@@ -103,7 +103,7 @@
           xfbml      : true                                     // parse XFBML
         });
 
-		Console.log("App ID je " + <%= @app['id']>);
+		Console.log("App ID je " + <%= @app['id']%>);
         // Listen to the auth.login which will be called when the user logs in
         // using the Login button
         FB.Event.subscribe('auth.login', function(response) {
