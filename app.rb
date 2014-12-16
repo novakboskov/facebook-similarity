@@ -3,7 +3,7 @@ require 'koala'
 
 enable :sessions
 set :raise_errors, false
-set :show_exceptions, false
+#set :show_exceptions, false
 
 # Scope defines what permissions that we are asking the user to grant.
 # In this example, we are asking for the ability to publish stories
@@ -12,6 +12,9 @@ set :show_exceptions, false
 # permissions your app needs.
 # See https://developers.facebook.com/docs/reference/api/permissions/
 # for a full list of permissions
+
+Koala.config.api_version = "v2.0"
+
 FACEBOOK_SCOPE = 'user_likes,user_photos'
 
 unless ENV["FACEBOOK_APP_ID"] && ENV["FACEBOOK_SECRET"]
@@ -46,11 +49,13 @@ helpers do
     @authenticator ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"], url("/auth/facebook/callback"))
   end
 
+  puts "--------------------------------------------------SADA DEFINISE HELPER access_token_from_cookie--------------------------------------------------"
   # allow for javascript authentication
   def access_token_from_cookie
     authenticator.get_user_info_from_cookies(request.cookies)['access_token']
   rescue => err
-    warn err.message + " OTISAO NA ERR MESSAGE NONO"
+    warn err.message
+    puts "OTISAO NA ERR"
   end
 
   def access_token

@@ -9,3 +9,5 @@ gem "koala"
 gem "json"
 gem "httparty"
 gem "thin"
+
+gem "rails"
