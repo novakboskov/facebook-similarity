@@ -94,6 +94,11 @@ get "/" do
   erb :index
 end
 
+# ovo pogoditi da se trigeruje racunanje
+get "/calculate" do
+  erb :calculate
+end
+
 # used by Canvas apps - redirect the POST to be a regular GET
 post "/" do
   redirect "/"
