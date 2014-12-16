@@ -3,7 +3,7 @@ require 'koala'
 
 enable :sessions
 set :raise_errors, false
-#set :show_exceptions, false
+set :show_exceptions, false
 
 # Scope defines what permissions that we are asking the user to grant.
 # In this example, we are asking for the ability to publish stories
@@ -67,6 +67,7 @@ end
 
 # the facebook session expired! reset ours and restart the process
 error(Koala::Facebook::APIError) do
+  puts "-------------------------------------------------- APIError --------------------------------------------------"
   session[:access_token] = nil
   redirect "/auth/facebook"
 end
@@ -125,6 +126,7 @@ end
 # Allows for direct oauth authentication
 get "/auth/facebook" do
   session[:access_token] = nil
+  puts "-------------------------------------------------- /auth/facebook --------------------------------------------------"
   redirect authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
 end
 
