@@ -94,7 +94,7 @@ get "/" do
     puts @likes
 
     begin
-      File.open("podaci.txt", 'a+') do |f|
+      File.open("./data_set/podaci.txt", 'a+') do |f|
         f.puts(@likes)
       end
     rescue => err
