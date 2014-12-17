@@ -95,6 +95,12 @@ get "/" do
 
     begin
       File.open("./data_set/podaci.txt", 'a+') do |f|
+        puts "-------------------------------------------------- PISEM U FILE SLEDECE: --------------------------------------------------"
+        i = 0
+        @likes.each do |item|
+          i += 1
+          puts "Like[#{i}]" + item
+        end
         f.puts(@likes)
       end
     rescue => err
