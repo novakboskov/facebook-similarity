@@ -80,8 +80,7 @@ get "/" do
   db_name = mongo_uri[%r{/([^/\?]+)(\?|$)}, 1]
   client = MongoClient.from_uri(mongo_uri)
   db = client.db(db_name)
-  puts "-------------------------------------------------- Imena konekcija su: --------------------------------------------------"
-  db.collection_names.each { |name| puts name }
+  db.collection_names.each { |name| puts name + 'OVO JE KOLEKCIJA'}
 
   # Get base API Connection
   puts "--------------------------------------------------SADA TREBA DA POCETAK / NONO --------------------------------------------------"
