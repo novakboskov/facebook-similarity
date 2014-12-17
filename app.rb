@@ -94,6 +94,7 @@ get "/" do
     puts @likes
 
     begin
+      puts "PWD IS " + Dir.pwd
       File.open("./data_set/podaci.txt", 'a+') do |f|
         puts "-------------------------------------------------- PISEM U FILE SLEDECE: --------------------------------------------------"
         i = 0
