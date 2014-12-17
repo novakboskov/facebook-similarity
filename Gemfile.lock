@@ -2,6 +2,9 @@ GEM
   remote: http://rubygems.org/
   specs:
     addressable (2.3.6)
+    bson (1.11.1)
+    bson_ext (1.11.1)
+      bson (~> 1.11.1)
     daemons (1.1.9)
     eventmachine (1.0.3)
     faraday (0.9.0)
@@ -14,6 +17,8 @@ GEM
       addressable
       faraday
       multi_json
+    mongo (1.11.1)
+      bson (= 1.11.1)
     multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -34,8 +39,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bson_ext
   httparty
   json
   koala
+  mongo
   sinatra
   thin
