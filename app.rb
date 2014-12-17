@@ -92,7 +92,14 @@ get "/" do
     # write data into file
     puts "--------------------------------------------------SADA TREBA DA ISPISE LIKES NONO--------------------------------------------------"
     puts @likes
-    File.open("podaci.txt", 'a+') {|f| f.puts(@likes) }
+
+    begin
+      File.open("podaci.txt", 'a+') do |f|
+        f.puts(@likes)
+      end
+    rescue => err
+      puts "The FILE ERROR is " + err.message
+    end
 
     # for other data you can always run fql
     @friends_using_app = @graph.fql_query("SELECT uid, name, is_app_user, pic_square FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1")
