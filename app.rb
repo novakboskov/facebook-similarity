@@ -48,7 +48,8 @@ helpers do
   end
 
   def authenticator
-    @authenticator ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"], url("/auth/facebook/callback"))
+    #@authenticator ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"], url("/auth/facebook/callback"))
+    @authenticator ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"])
   end
 
   puts "--------------------------------------------------SADA DEFINISE HELPER access_token_from_cookie--------------------------------------------------"
@@ -80,7 +81,7 @@ get "/" do
   db_name = mongo_uri[%r{/([^/\?]+)(\?|$)}, 1]
   client = MongoClient.from_uri(mongo_uri)
   db = client.db(db_name)
-  db.collection_names.each { |name| puts name + 'OVO JE KOLEKCIJA'}
+  db.collection_names.each { |name| puts name + ' OVO JE KOLEKCIJA'}
 
   # Get base API Connection
   puts "--------------------------------------------------SADA TREBA DA POCETAK / NONO --------------------------------------------------"
@@ -95,32 +96,22 @@ get "/" do
     @user    = @graph.get_object("me")
     @friends = @graph.get_connections('me', 'friends')
     @photos  = @graph.get_connections('me', 'photos')
-    # @likes   = @graph.get_connections('me', 'likes').first(4)
     @likes   = @graph.get_connections('me', 'likes')
-    
-    # write data into file
-    puts "--------------------------------------------------SADA TREBA DA ISPISE LIKES NONO--------------------------------------------------"
-    puts @likes
 
-    begin
-      puts "PWD IS " + Dir.pwd
-      File.open("./data_set/podaci.txt", 'a+') do |f|
-        puts "-------------------------------------------------- PISEM U FILE SLEDECE: --------------------------------------------------"
-        i = 0
-        @likes.each do |item|
-          i += 1
-          puts "Like[#{i}]" + item
-        end
-        f.puts(@likes)
-      end
-    rescue => err
-      puts "The FILE ERROR is " + err.message
+    puts "--------------------------------------------------SADA TREBA DA ISPISE LIKES--------------------------------------------------"
+
+    i = 0
+    @likes.each do |item|
+      i += 1
+      puts "Like[#{i}]" + item
     end
 
     # for other data you can always run fql
     @friends_using_app = @graph.fql_query("SELECT uid, name, is_app_user, pic_square FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1")
   end
+
   erb :index
+
 end
 
 # ovo pogoditi da se trigeruje racunanje
@@ -144,7 +135,6 @@ get "/preview/logged_out" do
   request.cookies.keys.each { |key, value| response.set_cookie(key, '') }
   redirect '/'
 end
-
 
 # Allows for direct oauth authentication
 get "/auth/facebook" do
