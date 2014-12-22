@@ -63,7 +63,6 @@ helpers do
 
   def access_token
     puts "SADA TREBA DA UZME ACCESS TOKEN U access_token helperu, access_token = " + session[:access_token]
-    puts "access_token_from_cookie = " + access_token_from_cookie
     session[:access_token] || access_token_from_cookie
   end
 
