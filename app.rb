@@ -62,7 +62,8 @@ helpers do
   end
 
   def access_token
-    puts "--------------------------------------------------SADA TREBA DA UZME ACCESS TOKEN NONO--------------------------------------------------"
+    puts "SADA TREBA DA UZME ACCESS TOKEN U access_token helperu, access_token = " + session[:access_token]
+    puts "access_token_from_cookie = " + access_token_from_cookie
     session[:access_token] || access_token_from_cookie
   end
 
@@ -70,7 +71,7 @@ end
 
 # the facebook session expired! reset ours and restart the process
 error(Koala::Facebook::APIError) do
-  puts "-------------------------------------------------- APIError --------------------------------------------------"
+  puts "-------------------------------------------------- API Error --------------------------------------------------"
   session[:access_token] = nil
   redirect "/auth/facebook"
 end
@@ -84,13 +85,11 @@ get "/" do
   db.collection_names.each { |name| puts name + ' OVO JE KOLEKCIJA'}
 
   # Get base API Connection
-  puts "--------------------------------------------------SADA TREBA DA POCETAK / NONO --------------------------------------------------"
+  puts "--------------------------------------------------SADA TREBA DA DOBIJE GRAPH TOKENOM --------------------------------------------------"
   @graph  = Koala::Facebook::API.new(access_token)
 
   # Get public details of current application
   @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
-  
-  puts "--------------------------------------------------SADA TREBA DA ZATRAZI TOKEN NONO--------------------------------------------------"
 
   if access_token
     @user    = @graph.get_object("me")
@@ -103,7 +102,11 @@ get "/" do
     i = 0
     @likes.each do |item|
       i += 1
-      puts "Like[#{i}]" + item
+      puts "Like[#{i}] = " + item + "\n"
+    end
+    ii = 0
+    @friends.each do |friend|
+      puts "friend[#{ii}] = " + friend + "\n"
     end
 
     # for other data you can always run fql
@@ -144,6 +147,7 @@ get "/auth/facebook" do
 end
 
 get '/auth/facebook/callback' do
+  puts 'U AUTH/FACEBOOK/CALLBACK , access_token = ' + session[:access_token]
   session[:access_token] = authenticator.get_access_token(params[:code])
   redirect '/'
 end
