@@ -148,7 +148,9 @@ get "/auth/facebook" do
 end
 
 get '/auth/facebook/callback' do
-  puts 'U AUTH/FACEBOOK/CALLBACK , access_token = ' + session[:access_token]
+  token_string = ''
+  token_string ||= session[:access_token]
+  puts 'U AUTH/FACEBOOK/CALLBACK , access_token = ' + token_string
   session[:access_token] = authenticator.get_access_token(params[:code])
   redirect '/'
 end
