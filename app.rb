@@ -62,7 +62,9 @@ helpers do
   end
 
   def access_token
-    puts "SADA TREBA DA UZME ACCESS TOKEN U access_token helperu, access_token = " + session[:access_token]
+    token_string = ''
+    token_string ||= session[:access_token]
+    puts "SADA TREBA DA UZME ACCESS TOKEN U access_token helperu, access_token = " + token_string
     session[:access_token] || access_token_from_cookie
   end
 
