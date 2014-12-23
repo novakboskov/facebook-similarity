@@ -149,7 +149,8 @@ end
 get "/auth/facebook" do
   #session[:access_token] = nil
   puts "-------------------------------------------------- /auth/facebook --------------------------------------------------"
-  redirect authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
+  #redirect authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
+  redirect session['oauth'].url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
 end
 
 get '/auth/facebook/callback' do
