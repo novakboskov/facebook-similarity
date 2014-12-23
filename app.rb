@@ -95,7 +95,8 @@ get "/" do
   # Get public details of current application
   @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
 
-  if access_token
+  #if access_token
+  if session[:access_token]
     @user    = @graph.get_object("me")
     @friends = @graph.get_connections('me', 'friends')
     @photos  = @graph.get_connections('me', 'photos')
