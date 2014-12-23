@@ -216,3 +216,7 @@ get '/callback' do
   session['access_token'] = session['oauth'].get_access_token(params[:code])
   redirect '/'
 end
+
+get "/auth/facebook" do
+  redirect session['oauth'].url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
+end
