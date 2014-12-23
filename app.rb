@@ -57,7 +57,7 @@ helpers do
     #authenticator.get_user_info_from_cookies(request.cookies)['access_token']
     session['oauth'] ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"], url("/auth/facebook/callback"))
     # redirect to facebook to get your code
-    puts "############################ SADA TREBA DA REDIREKTUJEM NA URL FOR OAUTH CODE##########################"
+    puts "_____________________ SADA TREBA DA REDIREKTUJEM NA URL FOR OAUTH CODE_______________________"
     redirect session['oauth'].url_for_oauth_code()
   rescue => err
     warn err.message
