@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="21a6cef7-7729-49e6-977b-886da187cb41" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.rb" afterPath="$PROJECT_DIR$/app.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="facebook-template-ruby.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -93,8 +94,8 @@
       <file leaf-file-name="app.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36393443" vertical-offset="678" max-vertical-offset="3270">
-              <caret line="60" column="50" selection-start-line="60" selection-start-column="50" selection-end-line="60" selection-end-column="50" />
+            <state vertical-scroll-proportion="0.39344263" vertical-offset="1260" max-vertical-offset="3390">
+              <caret line="100" column="5" selection-start-line="100" selection-start-column="5" selection-end-line="100" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -840,8 +841,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36393443" vertical-offset="678" max-vertical-offset="3270">
-          <caret line="60" column="50" selection-start-line="60" selection-start-column="50" selection-end-line="60" selection-end-column="50" />
+        <state vertical-scroll-proportion="0.39344263" vertical-offset="1260" max-vertical-offset="3390">
+          <caret line="100" column="5" selection-start-line="100" selection-start-column="5" selection-end-line="100" selection-end-column="5" />
           <folding />
         </state>
       </provider>

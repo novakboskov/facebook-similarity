@@ -59,6 +59,8 @@ helpers do
     # redirect to facebook to get your code
     puts "_____________________ SADA TREBA DA REDIREKTUJEM NA URL FOR OAUTH CODE_______________________"
     redirect session['oauth'].url_for_oauth_code()
+  rescue Koala::Facebook::APIError => api_err
+    puts "__________ access_token_from_cookie, Koala::Facebook::APIError ________________\n api_err.http_status \n" + api_err.http_status.nil? + "\n api_err = \n" + api_err.message
   rescue => err
     warn err.message
     puts "OTISAO NA ERR"
@@ -73,12 +75,14 @@ helpers do
 
 end
 
+=begin
 # the facebook session expired! reset ours and restart the process
 error(Koala::Facebook::APIError) do
   puts "-------------------------------------------------- API Error --------------------------------------------------"
   session[:access_token] = nil
   redirect "/auth/facebook"
 end
+=end
 
 get "/" do
   # testiram mongo bazu
@@ -90,7 +94,11 @@ get "/" do
 
   # Get base API Connection
   puts "--------------------------------------------------SADA TREBA DA DOBIJE GRAPH TOKENOM --------------------------------------------------"
-  @graph  = Koala::Facebook::API.new(access_token)
+  begin
+    @graph  = Koala::Facebook::API.new(access_token)
+  rescue Koala::Facebook::APIError => api_err
+    puts "__________ / , Koala::Facebook::APIError ________________\n api_err.http_status \n" + api_err.http_status.nil? + "\n api_err = \n" + api_err.message
+  end
 
   # Get public details of current application
   @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
