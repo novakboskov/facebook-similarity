@@ -25,9 +25,6 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
-    rake (10.4.2)
-    ruby-debug-ide (0.4.24)
-      rake (>= 0.8.1)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -47,6 +44,5 @@ DEPENDENCIES
   json
   koala
   mongo
-  ruby-debug-ide
   sinatra
   thin
