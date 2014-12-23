@@ -90,7 +90,8 @@ get "/" do
 
   # Get base API Connection
   puts "--------------------------------------------------SADA TREBA DA DOBIJE GRAPH TOKENOM --------------------------------------------------"
-  @graph  = Koala::Facebook::API.new(access_token)
+  #@graph  = Koala::Facebook::API.new(access_token)
+  @graph = Koala::Facebook::API.new(session[:access_token])
 
   # Get public details of current application
   @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
