@@ -170,11 +170,19 @@ get '/' do
     'You are logged in! <a href="/logout">Logout</a>'
     # do some stuff with facebook here
     # for example:
-    # @graph = Koala::Facebook::GraphAPI.new(session["access_token"])
+    @graph = Koala::Facebook::GraphAPI.new(session["access_token"])
     # publish to your wall (if you have the permissions)
     # @graph.put_wall_post("I'm posting from my new cool app!")
     # or publish to someone else (if you have the permissions too ;) )
     # @graph.put_wall_post("Checkout my new cool app!", {}, "someoneelse's id")
+
+    @likes   = @graph.get_connections('me', 'likes')
+    i = 0
+    @likes.each do |item|
+      i += 1
+      puts "Like[#{i}] = " + item + "\n"
+    end
+
   else
     '<a href="/login">Login</a>'
   end
