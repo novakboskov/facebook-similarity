@@ -80,7 +80,6 @@ error(Koala::Facebook::APIError) do
   redirect "/auth/facebook"
 end
 
-=begin
 get "/" do
   # testiram mongo bazu
   mongo_uri = ENV['MONGOLAB_URI']
@@ -146,7 +145,7 @@ end
 
 # Allows for direct oauth authentication
 get "/auth/facebook" do
-  session[:access_token] = nil
+  #session[:access_token] = nil
   puts "-------------------------------------------------- /auth/facebook --------------------------------------------------"
   redirect authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
 end
@@ -163,8 +162,9 @@ get '/auth/facebook/callback' do
   puts 'U AUTH/FACEBOOK/CALLBACK , access_token = ' + token_string
   redirect '/'
 end
-=end
 
+=begin
+# Benben's solution
 get '/' do
   if session['access_token']
     'You are logged in! <a href="/logout">Logout</a>'
@@ -176,7 +176,7 @@ get '/' do
     # or publish to someone else (if you have the permissions too ;) )
     # @graph.put_wall_post("Checkout my new cool app!", {}, "someoneelse's id")
 
-    @likes   = @graph.get_connections('me', 'likes')
+    @likes = @graph.get_connections('me', 'likes')
     i = 0
     @likes.each do |item|
       i += 1
@@ -207,3 +207,4 @@ get '/callback' do
   session['access_token'] = session['oauth'].get_access_token(params[:code])
   redirect '/'
 end
+=end
