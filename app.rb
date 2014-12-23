@@ -152,7 +152,11 @@ end
 
 get '/auth/facebook/callback' do
   #session[:access_token] = authenticator.get_access_token(params[:code])
-  session[:access_token] = session['oauth'].get_access_token(params[:code])
+  begin
+    session[:access_token] = session['oauth'].get_access_token(params[:code])
+  rescue
+    puts "_______________session['oauth'] = nil ____________________"
+  end
   token_string = ''
   token_string ||= session[:access_token]
   puts 'U AUTH/FACEBOOK/CALLBACK , access_token = ' + token_string
