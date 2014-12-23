@@ -82,6 +82,7 @@ error(Koala::Facebook::APIError) do
   redirect "/auth/facebook"
 end
 
+=begin
 get "/" do
   # testiram mongo bazu
   mongo_uri = ENV['MONGOLAB_URI']
@@ -170,8 +171,8 @@ get '/auth/facebook/callback' do
   puts 'U AUTH/FACEBOOK/CALLBACK , access_token = ' + token_string
   redirect '/'
 end
+=end
 
-=begin
 # Benben's solution
 get '/' do
   if session['access_token']
@@ -215,4 +216,3 @@ get '/callback' do
   session['access_token'] = session['oauth'].get_access_token(params[:code])
   redirect '/'
 end
-=end
