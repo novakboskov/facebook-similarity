@@ -11,3 +11,4 @@ gem "httparty"
 gem "thin"
 gem 'mongo'
 gem 'bson_ext'
+gem 'ruby-debug-ide'

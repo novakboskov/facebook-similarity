@@ -49,13 +49,15 @@ helpers do
 
   def authenticator
     @authenticator ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"], url("/auth/facebook/callback"))
-    #@authenticator ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"])
   end
 
   puts "--------------------------------------------------SADA DEFINISE HELPER access_token_from_cookie--------------------------------------------------"
   # allow for javascript authentication
   def access_token_from_cookie
-    authenticator.get_user_info_from_cookies(request.cookies)['access_token']
+    #authenticator.get_user_info_from_cookies(request.cookies)['access_token']
+    session['oauth'] ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"], url("/auth/facebook/callback"))
+    # redirect to facebook to get your code
+    redirect session['oauth'].url_for_oauth_code()
   rescue => err
     warn err.message
     puts "OTISAO NA ERR"
@@ -83,7 +85,7 @@ get "/" do
   db_name = mongo_uri[%r{/([^/\?]+)(\?|$)}, 1]
   client = MongoClient.from_uri(mongo_uri)
   db = client.db(db_name)
-  db.collection_names.each { |name| puts name + ' OVO JE KOLEKCIJA'}
+  #db.collection_names.each { |name| puts name + ' OVO JE KOLEKCIJA'}
 
   # Get base API Connection
   puts "--------------------------------------------------SADA TREBA DA DOBIJE GRAPH TOKENOM --------------------------------------------------"
@@ -148,9 +150,10 @@ get "/auth/facebook" do
 end
 
 get '/auth/facebook/callback' do
+  #session[:access_token] = authenticator.get_access_token(params[:code])
+  session[:access_token] = session['oauth'].get_access_token(params[:code])
   token_string = ''
   token_string ||= session[:access_token]
   puts 'U AUTH/FACEBOOK/CALLBACK , access_token = ' + token_string
-  session[:access_token] = authenticator.get_access_token(params[:code])
   redirect '/'
 end
