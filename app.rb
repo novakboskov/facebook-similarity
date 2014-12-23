@@ -75,14 +75,12 @@ helpers do
 
 end
 
-=begin
 # the facebook session expired! reset ours and restart the process
 error(Koala::Facebook::APIError) do
   puts "-------------------------------------------------- API Error --------------------------------------------------"
   session[:access_token] = nil
   redirect "/auth/facebook"
 end
-=end
 
 get "/" do
   # testiram mongo bazu
