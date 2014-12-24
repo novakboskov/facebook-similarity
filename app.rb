@@ -98,6 +98,7 @@ get "/" do
   db = client.db(db_name)
   #db.collection_names.each { |name| puts name + ' OVO JE KOLEKCIJA'}
 
+  
   # Get base API Connection
   puts "--------------------------------------------------SADA TREBA DA DOBIJE GRAPH TOKENOM --------------------------------------------------"
   begin
