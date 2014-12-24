@@ -73,7 +73,9 @@ helpers do
   end
 
   def access_token
-    if session[:access_token].nil? {puts "__________ ACCESS TOKEN JE NIL U ACCESS_TOKEN_________"}
+    if session[:access_token].nil?
+      puts "__________ ACCESS TOKEN JE NIL U ACCESS_TOKEN_________"
+    end
     session[:access_token] || access_token_from_cookie
   end
 
