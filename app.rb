@@ -55,7 +55,8 @@ helpers do
   # allow for javascript authentication
   def access_token_from_cookie
     #authenticator.get_user_info_from_cookies(request.cookies)['access_token']
-    session['oauth'] ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"], url("/auth/facebook/callback"))
+    #session['oauth'] ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"], url("/auth/facebook/callback"))
+    session['oauth'] ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"])
     # redirect to facebook to get your code
     #puts "_____________________ SADA TREBA DA REDIREKTUJEM NA URL FOR OAUTH CODE_______________________"
     #redirect session['oauth'].url_for_oauth_code()
@@ -158,6 +159,19 @@ get "/auth/facebook" do
 end
 
 get '/auth/facebook/callback' do
+  #session[:access_token] = authenticator.get_access_token(params[:code])
+  begin
+    session[:access_token] = session['oauth'].get_access_token(params[:code])
+  rescue
+    puts "_______________session['oauth'] = nil ____________________"
+  end
+  token_string = ''
+  token_string ||= session[:access_token]
+  puts 'U AUTH/FACEBOOK/CALLBACK , access_token = ' + token_string
+  redirect '/'
+end
+
+get '/callback' do
   #session[:access_token] = authenticator.get_access_token(params[:code])
   begin
     session[:access_token] = session['oauth'].get_access_token(params[:code])
