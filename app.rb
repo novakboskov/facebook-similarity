@@ -4,7 +4,7 @@ require 'mongo'
 include Mongo
 
 enable :sessions
-set :raise_errors, false
+set :raise_errors, true
 set :show_exceptions, false
 
 # Scope defines what permissions that we are asking the user to grant.
