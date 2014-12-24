@@ -17,7 +17,7 @@ set :show_exceptions, false
 
 Koala.config.api_version = "v2.2"
 
-FACEBOOK_SCOPE = 'user_likes,user_photos'
+FACEBOOK_SCOPE = 'user_likes,user_photos,user_friends'
 
 unless ENV["FACEBOOK_APP_ID"] && ENV["FACEBOOK_SECRET"]
   abort("missing env vars: please set FACEBOOK_APP_ID and FACEBOOK_SECRET with your app credentials")
@@ -47,16 +47,16 @@ helpers do
     "#{scheme}://#{host}#{path}"
   end
 
-  # def authenticator
-  #   @authenticator ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"], url("/auth/facebook/callback"))
-  # end
+  def authenticator
+     @authenticator ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"], url("/auth/facebook/callback"))
+  end
 
   puts "--------------------------------------------------SADA DEFINISE HELPER access_token_from_cookie--------------------------------------------------"
   # allow for javascript authentication
   def access_token_from_cookie
     #authenticator.get_user_info_from_cookies(request.cookies)['access_token']
-    #session['oauth'] ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"], url("/auth/facebook/callback"))
-    session['oauth'] ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"])
+    authenticator
+    #session['oauth'] ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"])
     # redirect to facebook to get your code
     #puts "_____________________ SADA TREBA DA REDIREKTUJEM NA URL FOR OAUTH CODE_______________________"
     #redirect session['oauth'].url_for_oauth_code()
@@ -159,30 +159,16 @@ get "/auth/facebook" do
 end
 
 get '/auth/facebook/callback' do
-  #session[:access_token] = authenticator.get_access_token(params[:code])
   begin
-    session[:access_token] = session['oauth'].get_access_token(params[:code])
+    @authenticator.url_for_oauth_code(FACEBOOK_SCOPE)
+    # da vidim gde ce ovo gore da me redirektuje
   rescue
-    puts "_______________session['oauth'] = nil ____________________"
+    puts "_______________greska kod /auth/facebook/callback  ____________________"
   end
   token_string = ''
   token_string ||= session[:access_token]
   puts 'U AUTH/FACEBOOK/CALLBACK , access_token = ' + token_string
-  redirect '/'
-end
-
-get '/callback' do
-  #session[:access_token] = authenticator.get_access_token(params[:code])
-  redirect session['oauth'].url_for_oauth_code()
-  begin
-    session[:access_token] = session['oauth'].get_access_token(params[:code])
-  rescue Koala::Facebook::OAuthTokenRequestError => err
-    puts "_______________ OAuthTokenRequestError ____________________ \n" + err.message
-  end
-  token_string = ''
-  token_string ||= session[:access_token]
-  puts 'U AUTH/FACEBOOK/CALLBACK , access_token = ' + token_string
-  redirect '/'
+  #redirect '/'
 end
 
 =begin
