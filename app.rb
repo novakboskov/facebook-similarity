@@ -82,13 +82,12 @@ helpers do
 end
 
 # the facebook session expired! reset ours and restart the process
-=begin
 error(Koala::Facebook::APIError) do
   puts "-------------------------------------------------- API Error --------------------------------------------------"
   session[:access_token] = nil
-  redirect "/auth/facebook"
+  puts "___________desio se API ERROR u error hendleru"
+  #redirect "/auth/facebook"
 end
-=end
 
 get "/" do
   # testiram mongo bazu
@@ -98,7 +97,7 @@ get "/" do
   db = client.db(db_name)
   #db.collection_names.each { |name| puts name + ' OVO JE KOLEKCIJA'}
 
-  
+
   # Get base API Connection
   puts "--------------------------------------------------SADA TREBA DA DOBIJE GRAPH TOKENOM --------------------------------------------------"
   begin
