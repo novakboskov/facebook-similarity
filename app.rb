@@ -59,7 +59,7 @@ helpers do
   # allow for javascript authentication
   def access_token_from_cookie
     #authenticator.get_user_info_from_cookies(request.cookies)['access_token']
-    puts "_______________ SACE ZOVE AUTHENTICATOR __________________"
+    puts "_______________ SACE ZOVE AUTHENTICATOR u access_token_from_cookie __________________"
     authenticator
     #session['oauth'] ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"])
     # redirect to facebook to get your code
@@ -73,9 +73,7 @@ helpers do
   end
 
   def access_token
-    token_string = ''
-    token_string ||= session[:access_token]
-    puts "SADA TREBA DA UZME ACCESS TOKEN U access_token helperu, access_token = " + token_string
+    if session[:access_token].nil? {puts "__________ ACCESS TOKEN JE NIL U ACCESS_TOKEN_________"}
     session[:access_token] || access_token_from_cookie
   end
 
@@ -178,17 +176,12 @@ get "/auth/facebook" do
 end
 
 get "/auth/facebook/callback" do
-  #"<p>Kod je = #{params[:code]}</p>"
-  session[:access_token] = authenticator.get_access_token(params[:code])
-  "<h1>Access_token je = #{session[:access_token]}</h1>"
-=begin
   begin
     session[:access_token] = authenticator.get_access_token(params[:code])
   rescue Koala::Facebook::APIError => api_err2
     puts "_____ - greska u /auth/facebook/callback _______\n" + api_err2.fb_error_message
   end
-=end
-  #redirect '/'
+  redirect '/'
 end
 
 =begin
