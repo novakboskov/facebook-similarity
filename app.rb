@@ -215,7 +215,7 @@ get '/login' do
   # generate a new oauth object with your app data and your callback url
   session['oauth'] = Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"], "#{request.base_url}/callback")
   # redirect to facebook to get your code
-  redirect "/proba"
+  #redirect "/proba"
   redirect session['oauth'].url_for_oauth_code()
 end
 
@@ -229,7 +229,7 @@ end
 get '/callback' do
   #get the access token from facebook with your code
   session['access_token'] = session['oauth'].get_access_token(params[:code])
-  redirect '/'
+  #redirect '/'
 end
 
 get "/auth/facebook" do
