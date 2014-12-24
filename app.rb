@@ -48,7 +48,10 @@ helpers do
   end
 
   def authenticator
-     @authenticator ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"], url("/auth/facebook/callback"))
+    begin
+    @authenticator ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"], url("/auth/facebook/callback"))
+    rescue Koala::Facebook::APIError => api_err
+      puts "_____- greska u authenticator________\n" + api_err.fb_error_message
   end
 
   puts "--------------------------------------------------SADA DEFINISE HELPER access_token_from_cookie--------------------------------------------------"
@@ -65,7 +68,7 @@ helpers do
     puts "__________ access_token_from_cookie, Koala::Facebook::APIError ________________\n api_err.http_status \n" + api_err.http_status.nil? + "\n api_err = \n" + api_err.message
   rescue => err
     warn err.message
-    puts "OTISAO NA ERR"
+    puts "________________OTISAO NA ERR_________________"
   end
 
   def access_token
@@ -164,9 +167,8 @@ end
 get "/auth/facebook" do
   begin
     redirect @authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
-    # da vidim gde ce ovo gore da me redirektuje
-  rescue
-    puts "_______________greska kod /auth/facebook/callback  ____________________"
+  rescue Koala::Facebook::APIError => api_err
+    puts "_____ - greska u /auth/facebook _______\n" + api_err.fb_error_message
   end
   token_string = ''
   token_string ||= session[:access_token]
