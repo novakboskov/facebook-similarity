@@ -89,106 +89,104 @@ error(Koala::Facebook::APIError) do
   #redirect "/auth/facebook"
 end
 
-get "/" do
-  # testiram mongo bazu
-  mongo_uri = ENV['MONGOLAB_URI']
-  db_name = mongo_uri[%r{/([^/\?]+)(\?|$)}, 1]
-  client = MongoClient.from_uri(mongo_uri)
-  db = client.db(db_name)
-  #db.collection_names.each { |name| puts name + ' OVO JE KOLEKCIJA'}
+# get "/" do
+#   # testiram mongo bazu
+#   mongo_uri = ENV['MONGOLAB_URI']
+#   db_name = mongo_uri[%r{/([^/\?]+)(\?|$)}, 1]
+#   client = MongoClient.from_uri(mongo_uri)
+#   db = client.db(db_name)
+#   #db.collection_names.each { |name| puts name + ' OVO JE KOLEKCIJA'}
+#
+#
+#   # Get base API Connection
+#   puts "--------------------------------------------------SADA TREBA DA DOBIJE GRAPH TOKENOM --------------------------------------------------"
+#   begin
+#     @graph  = Koala::Facebook::API.new(access_token)
+#   rescue Koala::Facebook::APIError => api_err
+#     puts "__________ / , Koala::Facebook::APIError ________________\n api_err.http_status \n" + api_err.http_status.nil? + "\n api_err = \n" + api_err.message
+#   end
+#
+#   # Get public details of current application
+#   @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
+#
+#   if access_token
+#     @user    = @graph.get_object("me")
+#     @friends = @graph.get_connections('me', 'friends')
+#     @photos  = @graph.get_connections('me', 'photos')
+#     @likes   = @graph.get_connections('me', 'likes')
+#
+#     puts "--------------------------------------------------SADA TREBA DA ISPISE LIKES--------------------------------------------------"
+#
+#     i = 0
+#     @likes.each do |item|
+#       i += 1
+#       puts "Like[#{i}] = " + item + "\n"
+#     end
+#     ii = 0
+#     @friends.each do |friend|
+#       puts "friend[#{ii}] = " + friend + "\n"
+#     end
+#
+#     # for other data you can always run fql
+#     @friends_using_app = @graph.fql_query("SELECT uid, name, is_app_user, pic_square FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1")
+#   end
+#
+#   erb :index
+#
+# end
+# # ovo pogoditi da se trigeruje racunanje
+# get "/calculate" do
+#   erb :calculate
+# end
+#
+# # used by Canvas apps - redirect the POST to be a regular GET
+# post "/" do
+#   redirect "/"
+# end
+#
+# # used to close the browser window opened to post to wall/send to friends
+# get "/close" do
+#   "<body onload='window.close();'/>"
+# end
+#
+# # Doesn't actually sign out permanently, but good for testing
+# get "/preview/logged_out" do
+#   session[:access_token] = nil
+#   request.cookies.keys.each { |key, value| response.set_cookie(key, '') }
+#   redirect '/'
+# end
+#
+# =begin
+# # Allows for direct oauth authentication
+# get "/auth/facebook" do
+#   #session[:access_token] = nil
+#   puts "-------------------------------------------------- /auth/facebook --------------------------------------------------"
+#   #redirect authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
+#   redirect session['oauth'].url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
+# end
+# =end
+#
+# get "/auth/facebook" do
+#   begin
+#     redirect authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
+#   rescue Koala::Facebook::APIError => api_err
+#     puts "_____ - greska u /auth/facebook _______\n" + api_err.fb_error_message
+#   end
+#   token_string = ''
+#   token_string ||= session[:access_token]
+#   puts 'U AUTH/FACEBOOK/CALLBACK , access_token = ' + token_string
+#   #redirect '/'
+# end
+#
+# get "/auth/facebook/callback" do
+#   begin
+#     session[:access_token] = authenticator.get_access_token(params[:code])
+#   rescue Koala::Facebook::APIError => api_err2
+#     puts "_____ - greska u /auth/facebook/callback _______\n" + api_err2.fb_error_message
+#   end
+#   redirect '/'
+# end
 
-
-  # Get base API Connection
-  puts "--------------------------------------------------SADA TREBA DA DOBIJE GRAPH TOKENOM --------------------------------------------------"
-  begin
-    @graph  = Koala::Facebook::API.new(access_token)
-  rescue Koala::Facebook::APIError => api_err
-    puts "__________ / , Koala::Facebook::APIError ________________\n api_err.http_status \n" + api_err.http_status.nil? + "\n api_err = \n" + api_err.message
-  end
-
-  # Get public details of current application
-  @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
-
-  if access_token
-    @user    = @graph.get_object("me")
-    @friends = @graph.get_connections('me', 'friends')
-    @photos  = @graph.get_connections('me', 'photos')
-    @likes   = @graph.get_connections('me', 'likes')
-
-    puts "--------------------------------------------------SADA TREBA DA ISPISE LIKES--------------------------------------------------"
-
-    i = 0
-    @likes.each do |item|
-      i += 1
-      puts "Like[#{i}] = " + item + "\n"
-    end
-    ii = 0
-    @friends.each do |friend|
-      puts "friend[#{ii}] = " + friend + "\n"
-    end
-
-    # for other data you can always run fql
-    @friends_using_app = @graph.fql_query("SELECT uid, name, is_app_user, pic_square FROM user WHERE uid in (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1")
-  end
-
-  erb :index
-
-end
-
-# ovo pogoditi da se trigeruje racunanje
-get "/calculate" do
-  erb :calculate
-end
-
-# used by Canvas apps - redirect the POST to be a regular GET
-post "/" do
-  redirect "/"
-end
-
-# used to close the browser window opened to post to wall/send to friends
-get "/close" do
-  "<body onload='window.close();'/>"
-end
-
-# Doesn't actually sign out permanently, but good for testing
-get "/preview/logged_out" do
-  session[:access_token] = nil
-  request.cookies.keys.each { |key, value| response.set_cookie(key, '') }
-  redirect '/'
-end
-
-=begin
-# Allows for direct oauth authentication
-get "/auth/facebook" do
-  #session[:access_token] = nil
-  puts "-------------------------------------------------- /auth/facebook --------------------------------------------------"
-  #redirect authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
-  redirect session['oauth'].url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
-end
-=end
-
-get "/auth/facebook" do
-  begin
-    redirect authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
-  rescue Koala::Facebook::APIError => api_err
-    puts "_____ - greska u /auth/facebook _______\n" + api_err.fb_error_message
-  end
-  token_string = ''
-  token_string ||= session[:access_token]
-  puts 'U AUTH/FACEBOOK/CALLBACK , access_token = ' + token_string
-  #redirect '/'
-end
-
-get "/auth/facebook/callback" do
-  begin
-    session[:access_token] = authenticator.get_access_token(params[:code])
-  rescue Koala::Facebook::APIError => api_err2
-    puts "_____ - greska u /auth/facebook/callback _______\n" + api_err2.fb_error_message
-  end
-  redirect '/'
-end
-
-=begin
 # Benben's solution
 get '/' do
   if session['access_token']
@@ -236,4 +234,3 @@ end
 get "/auth/facebook" do
   redirect session['oauth'].url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
 end
-=end
