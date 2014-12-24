@@ -178,7 +178,7 @@ get "/auth/facebook" do
 end
 
 get "/auth/facebook/callback" do
-  "Kod je = " + params[:code]
+  "<p>Kod je = #{params[:code]}</a>"
   begin
     session[:access_token] = authenticator.get_access_token(params[:code])
   rescue Koala::Facebook::APIError => api_err2
