@@ -90,8 +90,8 @@ get "/" do
 
     puts "Ovo su lajkovi:\n"
     i = 0
-    @likes.each do |key, val|
-      puts val + "\n"
+    @likes.each do |like|
+      puts like['name'] + "\n"
     end
   end
   erb :index

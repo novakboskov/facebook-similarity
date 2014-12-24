@@ -93,8 +93,8 @@
       <file leaf-file-name="app.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.58196723" vertical-offset="1055" max-vertical-offset="1980">
-              <caret line="94" column="7" selection-start-line="94" selection-start-column="7" selection-end-line="94" selection-end-column="7" />
+            <state vertical-scroll-proportion="0.55737704" vertical-offset="1055" max-vertical-offset="1980">
+              <caret line="93" column="30" selection-start-line="93" selection-start-column="30" selection-end-line="93" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -123,8 +123,8 @@
       <file leaf-file-name="index.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/index.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.673077" vertical-offset="2952" max-vertical-offset="3510">
-              <caret line="213" column="23" selection-start-line="213" selection-start-column="17" selection-end-line="213" selection-end-column="23" />
+            <state vertical-scroll-proportion="-5.826923" vertical-offset="2952" max-vertical-offset="3510">
+              <caret line="217" column="24" selection-start-line="217" selection-start-column="24" selection-end-line="217" selection-end-column="36" />
               <folding>
                 <marker date="1419445720493" expanded="true" signature="3054:3185" placeholder="..." />
               </folding>
@@ -868,8 +868,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/index.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.673077" vertical-offset="2952" max-vertical-offset="3510">
-          <caret line="213" column="23" selection-start-line="213" selection-start-column="17" selection-end-line="213" selection-end-column="23" />
+        <state vertical-scroll-proportion="-5.826923" vertical-offset="2952" max-vertical-offset="3510">
+          <caret line="217" column="24" selection-start-line="217" selection-start-column="24" selection-end-line="217" selection-end-column="36" />
           <folding>
             <marker date="1419445720493" expanded="true" signature="3054:3185" placeholder="..." />
           </folding>
@@ -878,8 +878,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58196723" vertical-offset="1055" max-vertical-offset="1980">
-          <caret line="94" column="7" selection-start-line="94" selection-start-column="7" selection-end-line="94" selection-end-column="7" />
+        <state vertical-scroll-proportion="0.55737704" vertical-offset="1055" max-vertical-offset="1980">
+          <caret line="93" column="30" selection-start-line="93" selection-start-column="30" selection-end-line="93" selection-end-column="30" />
           <folding />
         </state>
       </provider>
