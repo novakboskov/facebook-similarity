@@ -55,6 +55,7 @@ helpers do
   # allow for javascript authentication
   def access_token_from_cookie
     #authenticator.get_user_info_from_cookies(request.cookies)['access_token']
+    puts "_______________ SACE ZOVE AUTHENTICATOR __________________"
     authenticator
     #session['oauth'] ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"])
     # redirect to facebook to get your code
@@ -160,7 +161,7 @@ get "/auth/facebook" do
 end
 =end
 
-get '/auth/facebook/callback' do
+get "/auth/facebook" do
   begin
     @authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
     # da vidim gde ce ovo gore da me redirektuje
