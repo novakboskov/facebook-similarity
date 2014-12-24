@@ -218,19 +218,19 @@
             </ul>
           </div>
 
-          <div class="list">
-            <h3>Friends using this app</h3>
-            <ul class="friends">
-              <% @friends_using_app.each do |friend_result| %>
-                <li>
-                  <a href="#" onclick="window.open('http://www.facebook.com/<%= friend_result['uid'] %>')">
-                    <img src="<%= friend_result['pic_square'] %>" alt="<%= friend_result['name'] %>">
-                    <%= friend_result['name'] %>
-                  </a>
-                </li>
-              <% end %>
-            </ul>
-          </div>
+          <!--<div class="list">-->
+            <!--<h3>Friends using this app</h3>-->
+            <!--<ul class="friends">-->
+              <!--<% @friends_using_app.each do |friend_result| %>-->
+                <!--<li>-->
+                  <!--<a href="#" onclick="window.open('http://www.facebook.com/<%= friend_result['uid'] %>')">-->
+                    <!--<img src="<%= friend_result['pic_square'] %>" alt="<%= friend_result['name'] %>">-->
+                    <!--<%= friend_result['name'] %>-->
+                  <!--</a>-->
+                <!--</li>-->
+              <!--<% end %>-->
+            <!--</ul>-->
+          <!--</div>-->
         </section>
     <% end %>
 
