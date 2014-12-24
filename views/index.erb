@@ -103,7 +103,7 @@
           xfbml      : true                                     // parse XFBML
         });
 
-		Console.log("App ID je " + <%= @app['id']%>);
+		console.log("App ID je " + <%= @app['id']%>);
         // Listen to the auth.login which will be called when the user logs in
         // using the Login button
         FB.Event.subscribe('auth.login', function(response) {
@@ -169,16 +169,20 @@
     </header>
 
     <section id="get-started">
-      <p>Dobrodošli, sledeće što treba da uradite je klik na dugne Log In iznad.</p>
+      <% if @user %>
+        <p>Thank you for your confidence. We appreciate your help. :)</p>
+      <% else %>
+          <p>Please log in using button above.</p>
+      <% end %>
     </section>
 
 
     <% if @user %>
     <section id="samples" class="clearfix">
-          <h1>Examples of the Facebook Graph API</h1>
+          <h1>Please take a look at informations taken from your profile:</h1>
 
           <div class="list">
-            <h3>A few of your friends</h3>
+            <h3>A few of your friends using this app</h3>
             <ul class="friends">
               <% @friends.each do |friend| %>
                 <li>
@@ -217,7 +221,7 @@
               <% end %>
             </ul>
           </div>
-      
+
         </section>
     <% end %>
 
