@@ -77,6 +77,7 @@ end
 get "/" do
   # Get base API Connection
   @graph  = Koala::Facebook::API.new(access_token, ENV["FACEBOOK_SECRET"])
+  "<h1>#{access_token}<h1>"
 
   # Get public details of current application
   @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
@@ -94,7 +95,11 @@ get "/" do
       puts like
     end
   end
-  erb :index
+  if access_token.nil?
+    "<p>access_token je nil</p>"
+  else
+    erb :index
+  end
 end
 
 # used by Canvas apps - redirect the POST to be a regular GET
