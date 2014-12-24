@@ -86,6 +86,13 @@ get "/" do
     @friends = @graph.get_connections('me', 'friends')
     @photos  = @graph.get_connections('me', 'photos')
     @likes   = @graph.get_connections('me', 'likes')
+
+    puts "Ovo su lajkovi:\n"
+    i = 0
+    @likes.each do |item|
+      i += 1
+      puts "Like[#{i}] = " + item + "\n"
+    end
   end
   erb :index
 end
