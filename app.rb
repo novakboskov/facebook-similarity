@@ -178,8 +178,12 @@ get "/auth/facebook" do
 end
 
 get "/auth/facebook/callback" do
-  session[:access_token] = authenticator.get_access_token(params[:code])
-  redirect '/'
+  begin
+    session[:access_token] = authenticator.get_access_token(params[:code]
+  rescue Koala::Facebook::APIError => api_err
+    puts "_____ - greska u /auth/facebook/callback _______\n" + api_err.fb_error_message
+  end
+  #redirect '/'
 end
 
 =begin
