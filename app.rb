@@ -175,8 +175,8 @@ get '/callback' do
   #session[:access_token] = authenticator.get_access_token(params[:code])
   begin
     session[:access_token] = session['oauth'].get_access_token(params[:code])
-  rescue
-    puts "_______________session['oauth'] = nil ____________________"
+  rescue Koala::Facebook::OAuthTokenRequestError => err
+    puts "_______________ OAuthTokenRequestError ____________________ \n" + err.message
   end
   token_string = ''
   token_string ||= session[:access_token]
