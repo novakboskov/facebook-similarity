@@ -70,8 +70,8 @@ end
 error(Koala::Facebook::APIError) do
   puts "ERROR IS " + env['sinatra.error'].message
   session[:access_token] = nil
-  #redirect "/auth/facebook"
-  redirect "/nesto"
+  redirect "/auth/facebook"
+  #redirect "/nesto"
 end
 
 get "/" do
@@ -82,6 +82,7 @@ get "/" do
   @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
 
   if access_token
+    puts "Usao u if"
     @user    = @graph.get_object("me")
     @friends = @graph.get_connections('me', 'friends')
     @photos  = @graph.get_connections('me', 'photos')
@@ -116,9 +117,9 @@ end
 
 
 # Allows for direct oauth authentication
-get "/nesto" do
+get "/auth/facebook" do
   session[:access_token] = nil
-  #redirect authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
+  redirect authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
 end
 
 get '/auth/facebook/callback' do
