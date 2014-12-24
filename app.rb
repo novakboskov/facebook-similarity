@@ -150,6 +150,7 @@ get "/preview/logged_out" do
   redirect '/'
 end
 
+=begin
 # Allows for direct oauth authentication
 get "/auth/facebook" do
   #session[:access_token] = nil
@@ -157,10 +158,11 @@ get "/auth/facebook" do
   #redirect authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
   redirect session['oauth'].url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
 end
+=end
 
 get '/auth/facebook/callback' do
   begin
-    @authenticator.url_for_oauth_code(FACEBOOK_SCOPE)
+    @authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
     # da vidim gde ce ovo gore da me redirektuje
   rescue
     puts "_______________greska kod /auth/facebook/callback  ____________________"
