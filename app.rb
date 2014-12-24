@@ -68,7 +68,7 @@ end
 error(Koala::Facebook::APIError) do
   puts "ERROR IS " + env['sinatra.error'].message
   session[:access_token] = nil
-  #redirect "/auth/facebook"
+  redirect "/auth/facebook"
 end
 
 get "/" do
