@@ -178,9 +178,9 @@ get "/auth/facebook" do
 end
 
 get "/auth/facebook/callback" do
-  "<p>Kod je = #{params[:code]}</p>"
+  #"<p>Kod je = #{params[:code]}</p>"
   session[:access_token] = authenticator.get_access_token(params[:code])
-  "<p>Access_token je = #{session[:access_token]}</p>"
+  "<h1>Access_token je = #{session[:access_token]}</h1>"
 =begin
   begin
     session[:access_token] = authenticator.get_access_token(params[:code])
