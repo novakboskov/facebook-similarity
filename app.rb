@@ -53,7 +53,9 @@ helpers do
 
   # allow for javascript authentication
   def access_token_from_cookie
-    authenticator.get_user_info_from_cookies(request.cookies)['access_token']
+    #authenticator.get_user_info_from_cookies(request.cookies)['access_token']
+    authenticator
+    redirect authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
   rescue => err
     warn err.message
   end
@@ -112,7 +114,7 @@ end
 # Allows for direct oauth authentication
 get "/nesto" do
   session[:access_token] = nil
-  redirect authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
+  #redirect authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
 end
 
 get '/auth/facebook/callback' do
