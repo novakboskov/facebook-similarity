@@ -15,7 +15,7 @@ set :show_exceptions, false
 # See https://developers.facebook.com/docs/reference/api/permissions/
 # for a full list of permissions
 
-Koala.config.api_version = "v2.0"
+Koala.config.api_version = "v2.2"
 
 FACEBOOK_SCOPE = 'user_likes,user_photos'
 
@@ -57,8 +57,8 @@ helpers do
     #authenticator.get_user_info_from_cookies(request.cookies)['access_token']
     session['oauth'] ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"], url("/auth/facebook/callback"))
     # redirect to facebook to get your code
-    puts "_____________________ SADA TREBA DA REDIREKTUJEM NA URL FOR OAUTH CODE_______________________"
-    redirect session['oauth'].url_for_oauth_code()
+    #puts "_____________________ SADA TREBA DA REDIREKTUJEM NA URL FOR OAUTH CODE_______________________"
+    #redirect session['oauth'].url_for_oauth_code()
   rescue Koala::Facebook::APIError => api_err
     puts "__________ access_token_from_cookie, Koala::Facebook::APIError ________________\n api_err.http_status \n" + api_err.http_status.nil? + "\n api_err = \n" + api_err.message
   rescue => err
@@ -82,7 +82,6 @@ error(Koala::Facebook::APIError) do
   redirect "/auth/facebook"
 end
 
-=begin
 get "/" do
   # testiram mongo bazu
   mongo_uri = ENV['MONGOLAB_URI']
@@ -102,8 +101,7 @@ get "/" do
   # Get public details of current application
   @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
 
-  #if access_token
-  if session[:access_token]
+  if access_token
     @user    = @graph.get_object("me")
     @friends = @graph.get_connections('me', 'friends')
     @photos  = @graph.get_connections('me', 'photos')
@@ -171,8 +169,8 @@ get '/auth/facebook/callback' do
   puts 'U AUTH/FACEBOOK/CALLBACK , access_token = ' + token_string
   redirect '/'
 end
-=end
 
+=begin
 # Benben's solution
 get '/' do
   if session['access_token']
@@ -220,3 +218,4 @@ end
 get "/auth/facebook" do
   redirect session['oauth'].url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
 end
+=end
