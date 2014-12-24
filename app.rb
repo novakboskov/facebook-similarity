@@ -73,7 +73,7 @@ end
 
 get "/" do
   # Get base API Connection
-  @graph  = Koala::Facebook::API.new(access_token)
+  @graph  = Koala::Facebook::API.new(access_token, ENV["FACEBOOK_SECRET"])
 
   # Get public details of current application
   @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
