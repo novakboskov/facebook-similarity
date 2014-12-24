@@ -52,6 +52,7 @@ helpers do
     @authenticator ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"], url("/auth/facebook/callback"))
     rescue Koala::Facebook::APIError => api_err
       puts "_____- greska u authenticator________\n" + api_err.fb_error_message
+    end
   end
 
   puts "--------------------------------------------------SADA DEFINISE HELPER access_token_from_cookie--------------------------------------------------"
