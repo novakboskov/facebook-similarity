@@ -173,6 +173,7 @@ end
 
 get '/callback' do
   #session[:access_token] = authenticator.get_access_token(params[:code])
+  redirect session['oauth'].url_for_oauth_code()
   begin
     session[:access_token] = session['oauth'].get_access_token(params[:code])
   rescue Koala::Facebook::OAuthTokenRequestError => err
