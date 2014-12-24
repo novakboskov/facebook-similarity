@@ -68,7 +68,8 @@ end
 error(Koala::Facebook::APIError) do
   puts "ERROR IS " + env['sinatra.error'].message
   session[:access_token] = nil
-  redirect "/auth/facebook"
+  #redirect "/auth/facebook"
+  redirect "/nesto"
 end
 
 get "/" do
@@ -109,7 +110,7 @@ end
 
 
 # Allows for direct oauth authentication
-get "/auth/facebook" do
+get "/nesto" do
   session[:access_token] = nil
   redirect authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
 end
