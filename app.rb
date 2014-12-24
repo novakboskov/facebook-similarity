@@ -178,6 +178,7 @@ get "/auth/facebook" do
 end
 
 get "/auth/facebook/callback" do
+  puts "______________________-AJDE ISPISI__________________"
   "<p>Kod je = #{params[:code]}</a>"
 =begin
   begin
