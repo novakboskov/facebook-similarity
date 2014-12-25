@@ -81,11 +81,14 @@ get "/" do
   @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
 
   if access_token
-    puts "Usao u if"
+    puts "Usao u if PRE"
     @user    = @graph.get_object("me")
     @friends = @graph.get_connections('me', 'friends')
+    puts "Usao u if POSLE FRIEND"
     @photos  = @graph.get_connections('me', 'photos')
+    puts "Usao u if POSLE PHOTOS"
     @likes   = @graph.get_connections('me', 'likes')
+    puts "Usao u if POSLE LIKES"
 
     # ovde treba Kaca da ode
     @likes_num = 0
