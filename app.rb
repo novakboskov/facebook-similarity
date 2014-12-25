@@ -92,7 +92,7 @@ get "/" do
     @likes.each do |like|
       @likes_num += 1
     end
-    if likes_num == 0
+    if @likes_num == 0
       erb :greska
     end
 
@@ -100,7 +100,7 @@ get "/" do
     @photos.each do |photo|
       @photo_num += 1
     end
-    if photo_num == 0
+    if @photo_num == 0
       erb :greska
     end
 
