@@ -89,6 +89,10 @@ get "/" do
     @photos  = @graph.get_connections('me', 'photos')
     @likes   = @graph.get_connections('me', 'likes')
 
+    if @likes.length = 0
+      "<p>Length @likes = 0</p>"
+    end
+
     puts "Ovo su lajkovi:\n"
     i = 0
     @likes.each do |like|
