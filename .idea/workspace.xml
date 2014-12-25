@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="21a6cef7-7729-49e6-977b-886da187cb41" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.rb" afterPath="$PROJECT_DIR$/app.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="facebook-template-ruby.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -94,8 +93,8 @@
       <file leaf-file-name="app.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5360656" vertical-offset="1053" max-vertical-offset="2175">
-              <caret line="92" column="7" selection-start-line="92" selection-start-column="7" selection-end-line="92" selection-end-column="7" />
+            <state vertical-scroll-proportion="0.7819672" vertical-offset="1053" max-vertical-offset="2295">
+              <caret line="102" column="16" selection-start-line="102" selection-start-column="16" selection-end-line="102" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -134,8 +133,8 @@
       <file leaf-file-name="index.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/index.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1494" max-vertical-offset="3510">
-              <caret line="163" column="30" selection-start-line="163" selection-start-column="25" selection-end-line="163" selection-end-column="30" />
+            <state vertical-scroll-proportion="-4.673077" vertical-offset="2952" max-vertical-offset="3510">
+              <caret line="213" column="23" selection-start-line="213" selection-start-column="17" selection-end-line="213" selection-end-column="23" />
               <folding>
                 <marker date="1419445720493" expanded="true" signature="3054:3185" placeholder="..." />
               </folding>
@@ -881,8 +880,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/index.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1494" max-vertical-offset="3510">
-          <caret line="163" column="30" selection-start-line="163" selection-start-column="25" selection-end-line="163" selection-end-column="30" />
+        <state vertical-scroll-proportion="-4.673077" vertical-offset="2952" max-vertical-offset="3510">
+          <caret line="213" column="23" selection-start-line="213" selection-start-column="17" selection-end-line="213" selection-end-column="23" />
           <folding>
             <marker date="1419445720493" expanded="true" signature="3054:3185" placeholder="..." />
           </folding>
@@ -891,8 +890,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5360656" vertical-offset="1053" max-vertical-offset="2175">
-          <caret line="92" column="7" selection-start-line="92" selection-start-column="7" selection-end-line="92" selection-end-column="7" />
+        <state vertical-scroll-proportion="0.7819672" vertical-offset="1053" max-vertical-offset="2295">
+          <caret line="102" column="16" selection-start-line="102" selection-start-column="16" selection-end-line="102" selection-end-column="16" />
           <folding />
         </state>
       </provider>
