@@ -88,17 +88,17 @@ get "/" do
     @likes   = @graph.get_connections('me', 'likes')
 
     # ovde treba Kaca da ode
-    likes_num = 0
+    @likes_num = 0
     @likes.each do |like|
-      likes_num += 1
+      @likes_num += 1
     end
     if likes_num == 0
       erb :greska
     end
 
-    photo_num = 0
+    @photo_num = 0
     @photos.each do |photo|
-      photo_num += 1
+      @photo_num += 1
     end
     if photo_num == 0
       erb :greska
