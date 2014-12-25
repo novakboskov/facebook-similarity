@@ -89,8 +89,13 @@ get "/" do
     @photos  = @graph.get_connections('me', 'photos')
     @likes   = @graph.get_connections('me', 'likes')
 
+    # ovde treba Kaca da ode
     if @likes.length = 0
-      "<p>Length @likes = 0</p>"
+      erb :greska
+    end
+
+    if @photos.length = 0
+      erb :greska
     end
 
     puts "Ovo su lajkovi:\n"
