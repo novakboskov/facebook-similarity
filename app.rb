@@ -7,6 +7,17 @@ enable :sessions
 set :raise_errors, true
 set :show_exceptions, false
 
+# enable foreman to write on stdout non buffered way
+$stdout.sync = true
+
+# mongolab configuration
+mongo_uri = ENV['MONGOLAB_URI']
+db_name = mongo_uri[%r{/([^/\?]+)(\?|$)}, 1]
+client = MongoClient.from_uri(mongo_uri)
+db = client.db(db_name)
+# # connectivity testing
+# db.collection_names.each { |name| puts name + ' OVO JE KOLEKCIJA'}
+
 # Scope defines what permissions that we are asking the user to grant.
 # In this example, we are asking for the ability to publish stories
 # about using the app, access to what the user likes, and to be able
@@ -54,7 +65,7 @@ helpers do
   # allow for javascript authentication
   def access_token_from_cookie
     #authenticator.get_user_info_from_cookies(request.cookies)['access_token']
-    authenticator
+    #authenticator
     redirect authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
   rescue => err
     warn err.message
@@ -74,6 +85,7 @@ error(Koala::Facebook::APIError) do
 end
 
 get "/" do
+
   # Get base API Connection
   @graph  = Koala::Facebook::API.new(access_token, ENV["FACEBOOK_SECRET"])
 
@@ -81,21 +93,17 @@ get "/" do
   @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
 
   if access_token
-    puts "Usao u if PRE"
+
     @user    = @graph.get_object("me")
     @friends = @graph.get_connections('me', 'friends')
-    puts "Usao u if POSLE FRIEND"
     @photos  = @graph.get_connections('me', 'photos')
-    puts "Usao u if POSLE PHOTOS"
     @likes   = @graph.get_connections('me', 'likes')
-    puts "Usao u if POSLE LIKES"
 
     # ovde treba Kaca da ode
     @likes_num = 0
     @likes.each do |like|
       @likes_num += 1
     end
-    puts "UOPSTE PROVERAVAM @LIKES"
     if @likes_num < 3
       erb :greska
     end
@@ -113,11 +121,8 @@ get "/" do
       puts like
     end
   end
-  if access_token.nil?
-    "<p>access_token je nil</p>"
-  else
-    erb :index
-  end
+
+  erb :index
 end
 
 # used by Canvas apps - redirect the POST to be a regular GET
