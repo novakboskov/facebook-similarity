@@ -1,5 +1,38 @@
 module DataUtils
-  def write_collections(db, user, friends, photos, likes)
+  def data_pagination(likes, friends)
+
+    # likes pagination
+    current_likes = likes
+    begin
+      until current_likes.next_page.nil? do
+        likes.concat current_likes.next_page
+        current_likes = current_likes.next_page
+      end
+    rescue Koala::Facebook::APIError => err
+      # koala gem github:"arsduo/koala" issue #405
+      # error code 2500
+      puts "Error Koala pagination [@likes]: " + err.message
+    end
+
+    # friends pagination
+    current_friends = friends
+    begin
+      until current_friends.next_page.nil? do
+        friends.concat current_friends.next_page
+        current_friends = current_friends.next_page
+      end
+    rescue Koala::Facebook::APIError => err
+      # koala gem github:"arsduo/koala" issue #405
+      # error code 2500
+      puts "Error Koala pagination [@friends]: " + err.message
+    end
+
+  end
+
+  def write_collections(db, user, access_token, friends, photos, likes)
+
+    data_pagination(likes, friends)
+
     users_coll = db.collection("users")
     likes_coll = db.collection("likes")
     friends_coll = db.collection("friends")
@@ -9,6 +42,7 @@ module DataUtils
 
     user_doc = {'name' => user['name'],\
               'graph_id' =>  user['id'],\
+              'access_token' => access_token,\
               'link' =>  user['link'],\
               'gender' =>  user['gender'],\
               'inspirational_people' => user['inspirational_people'],\

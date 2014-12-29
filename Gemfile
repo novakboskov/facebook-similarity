@@ -5,7 +5,7 @@ source 'http://rubygems.org'
 ruby '2.1.2'
 
 gem "sinatra"
-gem "koala"
+gem "koala", github: "arsduo/koala", ref: "00364b128b2aac7247ad22e8fa58973dd5ea523d"
 gem "json"
 gem "httparty"
 gem "thin"

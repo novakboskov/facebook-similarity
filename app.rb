@@ -106,7 +106,7 @@ get "/" do
       puts like
     end
 
-    write_collections(db, @user, @friends, @photos, @likes)
+    write_collections(db, @user, access_token, @friends, @photos, @likes)
   end
 
   erb :index
