@@ -2,6 +2,8 @@ require "sinatra"
 require 'koala'
 require 'mongo'
 include Mongo
+require './modules/data_utils'
+include DataUtils
 
 enable :sessions
 set :raise_errors, true
@@ -99,27 +101,12 @@ get "/" do
     @photos  = @graph.get_connections('me', 'photos')
     @likes   = @graph.get_connections('me', 'likes')
 
-    # ovde treba Kaca da ode
-    @likes_num = 0
-    @likes.each do |like|
-      @likes_num += 1
-    end
-    if @likes_num < 3
-      erb :greska
-    end
-
-    @photo_num = 0
-    @photos.each do |photo|
-      @photo_num += 1
-    end
-    if @photo_num < 3
-      erb :greska
-    end
-
     puts "Ovo su lajkovi:\n"
     @likes.each do |like|
       puts like
     end
+
+    write_collections(db, @user, @friends, @photos, @likes)
   end
 
   erb :index
