@@ -106,10 +106,14 @@ get "/" do
       puts like
     end
 
-    write_collections(db, @user, access_token, @friends, @photos, @likes)
+    thread = Thread.new do
+      write_collections(db, @user, access_token, @friends, @photos, @likes)
+    end
+
   end
 
   erb :index
+
 end
 
 # used by Canvas apps - redirect the POST to be a regular GET

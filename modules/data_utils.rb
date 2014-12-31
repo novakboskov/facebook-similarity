@@ -1,6 +1,8 @@
 module DataUtils
   def data_pagination(likes, friends)
 
+    puts "POCEO DATA PAGINATION"
+
     # likes pagination
     current_likes = likes
     begin
@@ -26,6 +28,8 @@ module DataUtils
       # error code 2500
       puts "Error Koala pagination [@friends]: " + err.message
     end
+
+    puts "GOTOV DATA PAGINATION"
 
   end
 
@@ -56,6 +60,8 @@ module DataUtils
       end
     end
 
+    puts "GOTOV UPIS USER"
+
     # write likes
 
     likes_array = []
@@ -70,6 +76,8 @@ module DataUtils
         puts 'Error in insert likes_doc: ' + mongo_error.message
       end
     end
+
+    puts "GOTOV UPIS LIKES"
 
     # write friends
 
@@ -87,6 +95,8 @@ module DataUtils
       end
     end
 
+    puts "GOTOV UPIS FRIENDS"
+
     # write photos
 
     photos_array = []
@@ -101,6 +111,8 @@ module DataUtils
         puts 'Error in insert photos_doc: ' + mongo_error.message
       end
     end
+
+    puts "GOTOV UPIS PHOTOS"
 
   end
 end
