@@ -33,14 +33,14 @@ module DataUtils
 
   end
 
-  def write_collections(db, user, access_token, friends, photos, likes)
+  def write_collections(user, access_token, friends, photos, likes)
 
     data_pagination(likes, friends)
 
-    users_coll = db.collection("users")
-    likes_coll = db.collection("likes")
-    friends_coll = db.collection("friends")
-    photos_coll = db.collection("photos")
+    users_coll = settings.db.collection("users")
+    likes_coll = settings.db.collection("likes")
+    friends_coll = settings.db.collection("friends")
+    photos_coll = settings.db.collection("photos")
 
     # write user
 

@@ -9,16 +9,16 @@ enable :sessions
 set :raise_errors, true
 set :show_exceptions, false
 
+configure do
+  # mongolab configuration
+  mongo_uri = ENV['MONGOLAB_URI']
+  db_name = mongo_uri[%r{/([^/\?]+)(\?|$)}, 1]
+  client = MongoClient.from_uri(mongo_uri)
+  set :db, client.db(db_name)
+end
+
 # enable foreman to write on stdout non buffered way
 $stdout.sync = true
-
-# mongolab configuration
-mongo_uri = ENV['MONGOLAB_URI']
-db_name = mongo_uri[%r{/([^/\?]+)(\?|$)}, 1]
-client = MongoClient.from_uri(mongo_uri)
-db = client.db(db_name)
-# # connectivity testing
-# db.collection_names.each { |name| puts name + ' OVO JE KOLEKCIJA'}
 
 # Scope defines what permissions that we are asking the user to grant.
 # In this example, we are asking for the ability to publish stories
@@ -106,14 +106,19 @@ get "/" do
       puts like
     end
 
-    thread = Thread.new do
-      write_collections(db, @user, access_token, @friends, @photos, @likes)
+    @data_thread = Thread.new do
+      write_collections(@user, access_token, @friends, @photos, @likes)
     end
 
   end
 
   erb :index
 
+end
+
+get "/calculate" do
+  @data_thread.join
+  # Show algorithm results to the user
 end
 
 # used by Canvas apps - redirect the POST to be a regular GET
@@ -132,7 +137,6 @@ get "/preview/logged_out" do
   request.cookies.keys.each { |key, value| response.set_cookie(key, '') }
   redirect '/'
 end
-
 
 # Allows for direct oauth authentication
 # koristi se samo kada je API error
