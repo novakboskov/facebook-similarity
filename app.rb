@@ -106,9 +106,10 @@ get "/" do
       puts like
     end
 
-    @data_thread = Thread.new do
+    data_thread = Thread.new do
       write_collections(@user, access_token, @friends, @photos, @likes)
     end
+    session[:data_thread] = data_thread.object_id
 
   end
 
@@ -117,8 +118,20 @@ get "/" do
 end
 
 get "/calculate" do
-  @data_thread.join
-  # Show algorithm results to the user
+
+  begin
+  unless !ObjectSpace._id2ref(session[:data_thread]).alive?
+      data_thread = ObjectSpace._id2ref(session[:data_thread])
+      puts "Cekam da se joinuje data_thread"
+      data_thread.join
+  end
+  rescue RangeError => range_err
+    # session[:data_thread] is not id value
+    # direct access to /calculate without session
+    puts "RangeError in /calculate, direct access to /calculate without session: " + range_err.message
+  end
+
+  "<p>Under construction</p>"
 end
 
 # used by Canvas apps - redirect the POST to be a regular GET
