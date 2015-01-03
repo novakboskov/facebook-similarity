@@ -119,8 +119,12 @@ end
 
 get "/calculate" do
 
+  begin
   puts "ObjectSpace._id2ref(session[:data_thread]) = " + ObjectSpace._id2ref(session[:data_thread]).to_s\
   + " , session[:data_thread] = " + session[:data_thread].to_s
+  rescue RangeError => range_err
+    puts "RangeError kod ispisa ovog testa jer direct access to /calculate without session: " + range_err.message
+  end
 
   begin
   unless !ObjectSpace._id2ref(session[:data_thread]).alive?
