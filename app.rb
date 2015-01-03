@@ -119,6 +119,9 @@ end
 
 get "/calculate" do
 
+  puts "ObjectSpace._id2ref(session[:data_thread]) = " + ObjectSpace._id2ref(session[:data_thread]).to_s\
+  + " , session[:data_thread] = " + session[:data_thread].to_s
+
   begin
   unless !ObjectSpace._id2ref(session[:data_thread]).alive?
       data_thread = ObjectSpace._id2ref(session[:data_thread])
