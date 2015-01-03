@@ -122,7 +122,7 @@ get "/calculate" do
   begin
   unless !ObjectSpace._id2ref(session[:data_thread]).alive?
       data_thread = ObjectSpace._id2ref(session[:data_thread])
-      puts "Cekam da se joinuje data_thread"
+      puts "Cekam da se joinuje data_thread.object_id = " + data_thread.object_id.to_s
       data_thread.join
   end
   rescue RangeError => range_err
