@@ -119,11 +119,14 @@ end
 
 get "/calculate" do
 
+  # test
   begin
   puts "ObjectSpace._id2ref(session[:data_thread]) = " + ObjectSpace._id2ref(session[:data_thread]).to_s\
   + " , session[:data_thread] = " + session[:data_thread].to_s
   rescue RangeError => range_err
     puts "RangeError kod ispisa ovog testa jer direct access to /calculate without session: " + range_err.message
+  rescue TypeError => type_err
+    puts "TypeError kod ispisa ovog testa sessin[:data_thread]=nil: " + type_err.message
   end
 
   begin
@@ -136,6 +139,9 @@ get "/calculate" do
     # session[:data_thread] is not id value
     # direct access to /calculate without session
     puts "RangeError in /calculate, direct access to /calculate without session: " + range_err.message
+  rescue TypeError => type_error
+    # session[:data_thread] is nil
+    puts "TypeError in /calculate, direct access to /calculate without session: " + type_err.message
   end
 
   "<p>Under construction</p>"
