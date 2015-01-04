@@ -4,21 +4,29 @@ require 'mongo'
 include Mongo
 require './modules/data_utils'
 include DataUtils
+require './modules/helpers'
 
-enable :sessions
-set :raise_errors, true
-set :show_exceptions, false
+# enable foreman to write on stdout non buffered way
+$stdout.sync = true
 
 configure do
+  enable :sessions
+  set :session_secret, 'something secret'
+  set :raise_errors, true
+  set :show_exceptions, false
+
   # mongolab configuration
   mongo_uri = ENV['MONGOLAB_URI']
   db_name = mongo_uri[%r{/([^/\?]+)(\?|$)}, 1]
   client = MongoClient.from_uri(mongo_uri)
   set :db, client.db(db_name)
+
+  # threads_hash
+  data_threads_hash = {}
+  set :data_threads_hash, data_threads_hash
 end
 
-# enable foreman to write on stdout non buffered way
-$stdout.sync = true
+helpers Helpers
 
 # Scope defines what permissions that we are asking the user to grant.
 # In this example, we are asking for the ability to publish stories
@@ -41,42 +49,6 @@ before do
   if settings.environment == :production && request.scheme != 'https'
     redirect "https://#{request.env['HTTP_HOST']}"
   end
-end
-
-helpers do
-  def host
-    request.env['HTTP_HOST']
-  end
-
-  def scheme
-    request.scheme
-  end
-
-  def url_no_scheme(path = '')
-    "//#{host}#{path}"
-  end
-
-  def url(path = '')
-    "#{scheme}://#{host}#{path}"
-  end
-
-  def authenticator
-    @authenticator ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"], url("/auth/facebook/callback"))
-  end
-
-  # allow for javascript authentication
-  def access_token_from_cookie
-    #authenticator.get_user_info_from_cookies(request.cookies)['access_token']
-    #authenticator
-    redirect authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
-  rescue => err
-    warn err.message
-  end
-
-  def access_token
-    session[:access_token] || access_token_from_cookie
-  end
-
 end
 
 # the facebook session expired! reset ours and restart the process
@@ -109,7 +81,14 @@ get "/" do
     data_thread = Thread.new do
       write_collections(@user, access_token, @friends, @photos, @likes)
     end
-    session[:data_thread] = data_thread.object_id
+    #session[:data_thread] = data_thread.object_id
+
+    # within configuration
+    session[:user_id] = @user['id']
+    session[:user_name] = @user['name'] # debug samo
+    settings.data_threads_hash[session[:user_id]] = data_thread
+    puts "U '/' za korisnika #{session[:user_name]} JE = #{settings.data_threads_hash}\n \
+    OBJECT_ID settings.data_threads_hash = #{settings.data_threads_hash.object_id}"
 
   end
 
@@ -119,30 +98,47 @@ end
 
 get "/calculate" do
 
-  # test
-  begin
-  puts "ObjectSpace._id2ref(session[:data_thread]) = " + ObjectSpace._id2ref(session[:data_thread]).to_s\
-  + " , session[:data_thread] = " + session[:data_thread].to_s
-  rescue RangeError => range_errt
-    puts "RangeError kod ispisa ovog testa jer direct access to /calculate without session: " + range_errt.message
-  rescue TypeError => type_errt
-    puts "TypeError kod ispisa ovog testa sessin[:data_thread]=nil: " + type_errt.message
-  end
+  ## test
+  # begin
+  # puts "ObjectSpace._id2ref(session[:data_thread]) = " + ObjectSpace._id2ref(session[:data_thread]).to_s\
+  # + " , session[:data_thread] = " + session[:data_thread].to_s
+  # rescue RangeError => range_errt
+  #   puts "RangeError kod ispisa ovog testa jer direct access to /calculate without session: " + range_errt.message
+  # rescue TypeError => type_errt
+  #   puts "TypeError kod ispisa ovog testa sessin[:data_thread]=nil: " + type_errt.message
+  # end
+
+  # begin
+  # unless !ObjectSpace._id2ref(session[:data_thread]).alive?
+  #     data_thread = ObjectSpace._id2ref(session[:data_thread])
+  #     puts "Cekam da se joinuje data_thread.object_id = " + data_thread.object_id.to_s
+  #     data_thread.join
+  # end
+  # rescue RangeError => range_err
+  #   # session[:data_thread] is not id value
+  #   # direct access to /calculate without session
+  #   puts "RangeError in /calculate, direct access to /calculate without session: " + range_err.message
+  # rescue TypeError => type_err
+  #   # session[:data_thread] is nil
+  #   puts "TypeError in /calculate, direct access to /calculate without session: " + type_err.message
+  # end
+
+  puts "U '/calculate' za korisnika #{session[:user_name]} JE = #{settings.data_threads_hash}\n \
+    OBJECT_ID settings.data_threads_hash = #{settings.data_threads_hash.object_id}"
 
   begin
-  unless !ObjectSpace._id2ref(session[:data_thread]).alive?
-      data_thread = ObjectSpace._id2ref(session[:data_thread])
-      puts "Cekam da se joinuje data_thread.object_id = " + data_thread.object_id.to_s
-      data_thread.join
+  if settings.data_threads_hash[session[:user_id]].alive?
+    data_thread = settings.data_threads_hash[session[:user_id]]
+    puts "Cekam da se joinuje data_thread. "
+    data_thread.join
+    settings.data_threads_hash.delete session[:user_id]
   end
-  rescue RangeError => range_err
-    # session[:data_thread] is not id value
-    # direct access to /calculate without session
-    puts "RangeError in /calculate, direct access to /calculate without session: " + range_err.message
-  rescue TypeError => type_err
-    # session[:data_thread] is nil
-    puts "TypeError in /calculate, direct access to /calculate without session: " + type_err.message
+  rescue NoMethodError => no_meth_err
+    puts "NoMethodError: no session[:user_id] in settings.data_threads_hash: #{no_meth_err.message}"
   end
+
+  # if session[:user_id] is set show data
+  # if not redirect user to '/'
 
   "<p>Under construction</p>"
 end
@@ -176,6 +172,6 @@ get '/auth/facebook/callback' do
   redirect '/'
 end
 
-get "/privacypolicy" do
-  File.new('public/privacypolicy.htm').readlines
+get "/privacypolicy", :provides => 'html' do
+  send_file './static/privacypolicy.htm'
 end
