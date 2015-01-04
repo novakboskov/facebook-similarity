@@ -37,7 +37,7 @@ module DataUtils
 
     # debug
     if user['name'] =='Новак Бошков'
-      sleep 60
+      sleep 20
       p "Novak ceka"
     end
 
