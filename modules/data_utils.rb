@@ -35,14 +35,6 @@ module DataUtils
 
   def write_collections(user, access_token, friends, photos, likes)
 
-    # debug
-    if user['name'] =='Новак Бошков'
-      sleep 20
-      p "Novak ceka 2"
-    else
-      p "Katarina ne ceka 2"
-    end
-
     data_pagination(likes, friends)
 
     users_coll = settings.db.collection("users")
@@ -68,7 +60,7 @@ module DataUtils
       end
     end
 
-    puts "GOTOV UPIS USER 2 #{user['name']}"
+    puts "GOTOV UPIS USER #{user['name']}"
 
     # write likes
 
@@ -85,7 +77,7 @@ module DataUtils
       end
     end
 
-    puts "GOTOV UPIS LIKES 2 #{user['name']}"
+    puts "GOTOV UPIS LIKES #{user['name']}"
 
     # write friends
 
@@ -103,7 +95,7 @@ module DataUtils
       end
     end
 
-    puts "GOTOV UPIS FRIENDS 2 #{user['name']}"
+    puts "GOTOV UPIS FRIENDS #{user['name']}"
 
     # write photos
 
@@ -120,7 +112,7 @@ module DataUtils
       end
     end
 
-    puts "GOTOV UPIS PHOTOS 2 #{user['name']}"
+    puts "GOTOV UPIS PHOTOS #{user['name']}"
 
   end
 end

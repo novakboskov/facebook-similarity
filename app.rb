@@ -97,7 +97,7 @@ end
 
 get "/calculate" do
 
-  puts "U '/calculate' za korisnika #{session[:user_name]} JE = #{settings.data_threads_hash}\n \
+  puts "U '/calculate' za korisnika 2 #{session[:user_name]} JE = #{settings.data_threads_hash}\n \
     OBJECT_ID settings.data_threads_hash = #{settings.data_threads_hash.object_id}"
 
   begin
