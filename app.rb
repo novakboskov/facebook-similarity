@@ -97,13 +97,13 @@ end
 
 get "/calculate" do
 
-  puts "U '/calculate' za korisnika 2 #{session[:user_name]} JE = #{settings.data_threads_hash}\n \
+  puts "U '/calculate' za korisnika 3 #{session[:user_name]} = #{session[:user_id]} JE = #{settings.data_threads_hash}\n \
     OBJECT_ID settings.data_threads_hash = #{settings.data_threads_hash.object_id}"
 
   begin
   if settings.data_threads_hash[session[:user_id]].alive?
     data_thread = settings.data_threads_hash[session[:user_id]]
-    puts "Cekam da se joinuje data_thread. "
+    puts "Cekam da se joinuje data_thread za korisnik #{session[:user_name]} = #{session[:user_id]}. 3 "
     data_thread.join
     settings.data_threads_hash.delete session[:user_id]
   end
