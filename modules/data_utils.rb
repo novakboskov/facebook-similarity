@@ -35,6 +35,12 @@ module DataUtils
 
   def write_collections(user, access_token, friends, photos, likes)
 
+    # debug
+    if user['name'] =='Новак Бошков'
+      sleep 10
+      p "Novak ceka"
+    end
+
     data_pagination(likes, friends)
 
     users_coll = settings.db.collection("users")
