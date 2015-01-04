@@ -66,7 +66,7 @@ module DataUtils
       end
     end
 
-    puts "GOTOV UPIS USER"
+    puts "GOTOV UPIS USER #{user['name']}"
 
     # write likes
 
@@ -83,7 +83,7 @@ module DataUtils
       end
     end
 
-    puts "GOTOV UPIS LIKES"
+    puts "GOTOV UPIS LIKES #{user['name']}"
 
     # write friends
 
@@ -101,7 +101,7 @@ module DataUtils
       end
     end
 
-    puts "GOTOV UPIS FRIENDS"
+    puts "GOTOV UPIS FRIENDS #{user['name']}"
 
     # write photos
 
@@ -118,7 +118,7 @@ module DataUtils
       end
     end
 
-    puts "GOTOV UPIS PHOTOS"
+    puts "GOTOV UPIS PHOTOS #{user['name']}"
 
   end
 end

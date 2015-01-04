@@ -165,8 +165,8 @@
       <file leaf-file-name="data_utils.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/modules/data_utils.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.60192615" vertical-offset="195" max-vertical-offset="1935">
-              <caret line="38" column="21" selection-start-line="38" selection-start-column="21" selection-end-line="38" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.4574639" vertical-offset="315" max-vertical-offset="1935">
+              <caret line="40" column="22" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -966,8 +966,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modules/data_utils.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.60192615" vertical-offset="195" max-vertical-offset="1935">
-          <caret line="38" column="21" selection-start-line="38" selection-start-column="21" selection-end-line="38" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.4574639" vertical-offset="315" max-vertical-offset="1935">
+          <caret line="40" column="22" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
           <folding />
         </state>
       </provider>
