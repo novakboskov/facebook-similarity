@@ -81,12 +81,11 @@ get "/" do
     data_thread = Thread.new do
       write_collections(@user, access_token, @friends, @photos, @likes)
     end
-    #session[:data_thread] = data_thread.object_id
 
     # within configuration
     session[:user_id] = @user['id']
-    session[:user_name] = @user['name'] # debug samo
     settings.data_threads_hash[session[:user_id]] = data_thread
+    session[:user_name] = @user['name'] # debug samo
     puts "U '/' za korisnika #{session[:user_name]} JE = #{settings.data_threads_hash}\n \
     OBJECT_ID settings.data_threads_hash = #{settings.data_threads_hash.object_id}"
 
@@ -97,31 +96,6 @@ get "/" do
 end
 
 get "/calculate" do
-
-  ## test
-  # begin
-  # puts "ObjectSpace._id2ref(session[:data_thread]) = " + ObjectSpace._id2ref(session[:data_thread]).to_s\
-  # + " , session[:data_thread] = " + session[:data_thread].to_s
-  # rescue RangeError => range_errt
-  #   puts "RangeError kod ispisa ovog testa jer direct access to /calculate without session: " + range_errt.message
-  # rescue TypeError => type_errt
-  #   puts "TypeError kod ispisa ovog testa sessin[:data_thread]=nil: " + type_errt.message
-  # end
-
-  # begin
-  # unless !ObjectSpace._id2ref(session[:data_thread]).alive?
-  #     data_thread = ObjectSpace._id2ref(session[:data_thread])
-  #     puts "Cekam da se joinuje data_thread.object_id = " + data_thread.object_id.to_s
-  #     data_thread.join
-  # end
-  # rescue RangeError => range_err
-  #   # session[:data_thread] is not id value
-  #   # direct access to /calculate without session
-  #   puts "RangeError in /calculate, direct access to /calculate without session: " + range_err.message
-  # rescue TypeError => type_err
-  #   # session[:data_thread] is nil
-  #   puts "TypeError in /calculate, direct access to /calculate without session: " + type_err.message
-  # end
 
   puts "U '/calculate' za korisnika #{session[:user_name]} JE = #{settings.data_threads_hash}\n \
     OBJECT_ID settings.data_threads_hash = #{settings.data_threads_hash.object_id}"
