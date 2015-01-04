@@ -38,7 +38,7 @@ module DataUtils
     # debug
     if user['name'] =='Новак Бошков'
       sleep 20
-      p "Novak ceka"
+      p "Novak ceka 1"
     end
 
     data_pagination(likes, friends)
