@@ -38,7 +38,9 @@ module DataUtils
     # debug
     if user['name'] =='Новак Бошков'
       sleep 20
-      p "Novak ceka 1"
+      p "Novak ceka 2"
+    else
+      p "Katarina ne ceka 2"
     end
 
     data_pagination(likes, friends)
@@ -66,7 +68,7 @@ module DataUtils
       end
     end
 
-    puts "GOTOV UPIS USER #{user['name']}"
+    puts "GOTOV UPIS USER 2 #{user['name']}"
 
     # write likes
 
@@ -83,7 +85,7 @@ module DataUtils
       end
     end
 
-    puts "GOTOV UPIS LIKES #{user['name']}"
+    puts "GOTOV UPIS LIKES 2 #{user['name']}"
 
     # write friends
 
@@ -101,7 +103,7 @@ module DataUtils
       end
     end
 
-    puts "GOTOV UPIS FRIENDS #{user['name']}"
+    puts "GOTOV UPIS FRIENDS 2 #{user['name']}"
 
     # write photos
 
@@ -118,7 +120,7 @@ module DataUtils
       end
     end
 
-    puts "GOTOV UPIS PHOTOS #{user['name']}"
+    puts "GOTOV UPIS PHOTOS 2 #{user['name']}"
 
   end
 end
