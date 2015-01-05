@@ -42,26 +42,6 @@ module DataUtils
     friends_coll = settings.db.collection("friends")
     photos_coll = settings.db.collection("photos")
 
-    # write user
-
-    user_doc = {'name' => user['name'],\
-              'graph_id' =>  user['id'],\
-              'access_token' => access_token,\
-              'link' =>  user['link'],\
-              'gender' =>  user['gender'],\
-              'inspirational_people' => user['inspirational_people'],\
-              'languages' => user['languages']}
-
-    if users_coll.find_one({'graph_id' => user['id']}).nil?
-      begin
-        users_coll.insert(user_doc)
-      rescue Mongo::OperationFailure => mongo_error
-        puts 'Error in insert user_doc: ' + mongo_error.message
-      end
-    end
-
-    puts "GOTOV UPIS USER #{user['name']}"
-
     # write likes
 
     likes_array = []
@@ -113,6 +93,26 @@ module DataUtils
     end
 
     puts "GOTOV UPIS PHOTOS #{user['name']}"
+
+    # write user
+
+    user_doc = {'name' => user['name'],\
+              'graph_id' =>  user['id'],\
+              'access_token' => access_token,\
+              'link' =>  user['link'],\
+              'gender' =>  user['gender'],\
+              'inspirational_people' => user['inspirational_people'],\
+              'languages' => user['languages']}
+
+    if users_coll.find_one({'graph_id' => user['id']}).nil?
+      begin
+        users_coll.insert(user_doc)
+      rescue Mongo::OperationFailure => mongo_error
+        puts 'Error in insert user_doc: ' + mongo_error.message
+      end
+    end
+
+    puts "GOTOV UPIS USER #{user['name']}"
 
   end
 end
