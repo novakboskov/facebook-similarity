@@ -31,4 +31,16 @@ module Helpers
   def access_token
     session[:access_token] || access_token_from_cookie
   end
+
+  def users
+    settings.db.collection("users")
+  end
+
+  def likes
+    settings.db.collection("likes")
+  end
+
+  def friends
+    settings.db.collection("friends")
+  end
 end

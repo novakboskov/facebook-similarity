@@ -2,8 +2,6 @@ require "sinatra"
 require 'koala'
 require 'mongo'
 include Mongo
-require './modules/data_utils'
-include DataUtils
 require './helpers/helpers'
 
 # enable foreman to write on stdout non buffered way
@@ -56,99 +54,4 @@ error(Koala::Facebook::APIError) do
   redirect "/auth/facebook"
 end
 
-
 require_relative 'routes/init'
-
-# get "/" do
-#
-#   # Get base API Connection
-#   @graph  = Koala::Facebook::API.new(access_token, ENV["FACEBOOK_SECRET"])
-#
-#   # Get public details of current application
-#   @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
-#
-#   if access_token
-#
-#     @user    = @graph.get_object("me")
-#     @friends = @graph.get_connections('me', 'friends')
-#     @photos  = @graph.get_connections('me', 'photos')
-#     @likes   = @graph.get_connections('me', 'likes')
-#
-#     puts "Ovo su lajkovi:\n"
-#     @likes.each do |like|
-#       puts like
-#     end
-#
-#     # @data_thread = Thread.new do
-#     #   write_collections(@user, access_token, @friends, @photos, @likes)
-#     # end
-#
-#     session[:user_id] = @user['id']
-#
-#   end
-#
-#   erb :index
-#
-# end
-
-# get "/calculate" do
-#
-#   # # srecnije resenje
-#   # # dodati jos timestamps user-u pa ga redirektovati na '/' ako su suvise stari njegovi podaci
-#   # # user treba u data_utils da se upisuje poslednji
-#   while settings.db.collection("users").find_one({'graph_id' => session[:user_id]}).nil?
-#     puts settings.db.collection("users").find_one({'graph_id' => session[:user_id]})
-#     puts "CEKAM DA SE UPISE #{session[:user_id]}"
-#     next
-#   end
-#
-#   # if session[:user_id] is set show data
-#   # if not redirect user to '/'
-#
-#   "<p>Under construction</p>"
-# end
-#
-# # used by Canvas apps - redirect the POST to be a regular GET
-# post "/" do
-#   redirect "/"
-# end
-
-# # used to close the browser window opened to post to wall/send to friends
-# get "/close" do
-#   "<body onload='window.close();'/>"
-# end
-#
-# # Doesn't actually sign out permanently, but good for testing
-# get "/preview/logged_out" do
-#   session[:access_token] = nil
-#   request.cookies.keys.each { |key, value| response.set_cookie(key, '') }
-#   redirect '/'
-# end
-#
-# # Allows for direct oauth authentication
-# # koristi se samo kada je API error
-# get "/auth/facebook" do
-#   session[:access_token] = nil
-#   redirect authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
-# end
-#
-# get '/auth/facebook/callback' do
-#   session[:access_token] = authenticator.get_access_token(params[:code])
-#   redirect '/'
-# end
-
-# get "/privacypolicy", :provides => 'html' do
-#   send_file './static/privacypolicy.htm'
-# end
-#
-# before '/calculate' do
-#   while settings.db.collection("users").find_one({'graph_id' => session[:user_id]}).nil?
-#     puts settings.db.collection("users").find_one({'graph_id' => session[:user_id]})
-#     puts "CEKAM DA SE UPISE #{session[:user_id]}"
-#     next
-#   end
-# end
-#
-# after '/' do
-#   write_collections(@user, access_token, @friends, @photos, @likes)
-# end

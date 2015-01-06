@@ -1,3 +1,6 @@
+require_relative '../modules/data_utils'
+include DataUtils
+
 get "/" do
 
   # Get base API Connection
@@ -18,7 +21,7 @@ get "/" do
       puts like
     end
 
-    @data_thread = Thread.new do
+    data_thread = Thread.new do
       write_collections(@user, access_token, @friends, @photos, @likes)
     end
 
@@ -32,15 +35,6 @@ end
 
 get "/calculate" do
 
-  # # srecnije resenje
-  # # dodati jos timestamps user-u pa ga redirektovati na '/' ako su suvise stari njegovi podaci
-  # # user treba u data_utils da se upisuje poslednji
-  while settings.db.collection("users").find_one({'graph_id' => session[:user_id]}).nil?
-    puts settings.db.collection("users").find_one({'graph_id' => session[:user_id]})
-    puts "CEKAM DA SE UPISE #{session[:user_id]}"
-    next
-  end
-
   # if session[:user_id] is set show data
   # if not redirect user to '/'
 
@@ -52,14 +46,18 @@ post "/" do
   redirect "/"
 end
 
-# before '/calculate' do
-#   while settings.db.collection("users").find_one({'graph_id' => session[:user_id]}).nil?
-#     puts settings.db.collection("users").find_one({'graph_id' => session[:user_id]})
-#     puts "CEKAM DA SE UPISE #{session[:user_id]}"
-#     next
-#   end
-# end
-#
+before '/calculate' do
+  # srecnije resenje
+  # dodati jos timestamps user-u pa ga redirektovati na '/' ako su suvise stari njegovi podaci
+  # user treba u data_utils da se upisuje poslednji
+  while users.find_one({'graph_id' => session[:user_id]}).nil?
+    puts users.find_one({'graph_id' => session[:user_id]})
+    puts "CEKAM DA SE UPISE #{session[:user_id]}"
+    next
+  end
+end
+
+# after filter is blocking load :index
 # after '/' do
 #   write_collections(@user, access_token, @friends, @photos, @likes)
 # end
