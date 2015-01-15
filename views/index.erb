@@ -182,7 +182,7 @@
           <h1>Please take a look at informations taken from your profile:</h1>
 
           <div class="list">
-            <h3>A few of your friends using this app</h3>
+            <h3>Friends using this app</h3>
             <ul class="friends">
               <% @friends.each do |friend| %>
                 <li>
@@ -195,18 +195,9 @@
             </ul>
           </div>
 
-          <div class="list inline">
-            <h3>Recent photos</h3>
-            <ul class="photos">
-              <% @photos.each_with_index do |photo, index| %>
-                <li style="background-image: url(<%= photo['picture'] %>)" class='<%= 'first-column' if (index%4).zero? %>'>
-                  <a href="#" onclick="window.open('http://www.facebook.com/<%= photo['id'] %>')">
-                    <%= photo['name'] %>
-                  </a>
-                </li>
-              <% end %>
-            </ul>
-          </div>
+        <div class="list">
+          <h3>&nbsp;</h3>
+        </div>
 
           <div class="list">
             <h3>Things you like</h3>
