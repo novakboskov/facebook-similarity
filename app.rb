@@ -34,7 +34,7 @@ helpers Helpers
 
 Koala.config.api_version = "v2.2"
 
-FACEBOOK_SCOPE = 'user_likes,user_photos,user_friends'
+FACEBOOK_SCOPE = 'user_likes, user_friends'
 
 unless ENV["FACEBOOK_APP_ID"] && ENV["FACEBOOK_SECRET"]
   abort("missing env vars: please set FACEBOOK_APP_ID and FACEBOOK_SECRET with your app credentials")
