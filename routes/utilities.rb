@@ -38,6 +38,9 @@ get "/calculate" do
   # if session[:user_id] is set show data
   # if not redirect user to '/'
 
+  # read calculated data for the corresponding user to some @user_calculated_data
+  # visualize it with some erb
+
   "<p>Under construction</p>"
 end
 

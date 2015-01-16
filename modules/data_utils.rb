@@ -115,4 +115,29 @@ module DataUtils
     puts "GOTOV UPIS USER #{user['name']}"
 
   end
+
+  # Collects all categories from all the likes
+  def prepare_categories
+
+  end
+
+  # Prepare all the data required to calculate user related information
+  def prepare
+    prepare_categories
+  end
+
+  # Makes all the users data vectors
+  def vector
+
+  end
+
+  # Calculates user data based on it's user graph ID
+  # @param id Facebook graph API ID of the user stored in database as graph_id
+  def calculate(id)
+    prepare
+
+    vector
+    # calculate Pearson score for given user against all the other users
+    # store the calculated data to database
+  end
 end
