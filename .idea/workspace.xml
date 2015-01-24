@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21a6cef7-7729-49e6-977b-886da187cb41" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/helpers/helpers.rb" afterPath="$PROJECT_DIR$/helpers/helpers.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/index.erb" afterPath="$PROJECT_DIR$/views/index.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/utilities.rb" afterPath="$PROJECT_DIR$/routes/utilities.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="facebook-template-ruby.iws" />
@@ -146,10 +144,10 @@
       <file leaf-file-name="index.erb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/index.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.1318493" vertical-offset="1845" max-vertical-offset="4605">
-              <caret line="40" column="54" selection-start-line="40" selection-start-column="54" selection-end-line="40" selection-end-column="54" />
+            <state vertical-scroll-proportion="0.64041096" vertical-offset="3901" max-vertical-offset="4680">
+              <caret line="285" column="44" selection-start-line="285" selection-start-column="44" selection-end-line="285" selection-end-column="44" />
               <folding>
-                <marker date="1422112672553" expanded="true" signature="3504:3635" placeholder="..." />
+                <marker date="1422115680081" expanded="true" signature="3504:3635" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -985,10 +983,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/index.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.1318493" vertical-offset="1845" max-vertical-offset="4605">
-          <caret line="40" column="54" selection-start-line="40" selection-start-column="54" selection-end-line="40" selection-end-column="54" />
+        <state vertical-scroll-proportion="0.64041096" vertical-offset="3901" max-vertical-offset="4680">
+          <caret line="285" column="44" selection-start-line="285" selection-start-column="44" selection-end-line="285" selection-end-column="44" />
           <folding>
-            <marker date="1422112672553" expanded="true" signature="3504:3635" placeholder="..." />
+            <marker date="1422115680081" expanded="true" signature="3504:3635" placeholder="..." />
           </folding>
         </state>
       </provider>

@@ -238,7 +238,7 @@
           </div>
       <% else %>
         <div>
-          <h1>Welcome</h1>
+          <h1>Welcome to <b>similarity</b> start page</h1>
           <div class="fb-login-button" data-scope="<%= FACEBOOK_SCOPE %>" onlogin="checkLoginState();">Log In</div>
 
         </div>
@@ -254,17 +254,18 @@
       <% if @user %>
         <p>Thank you for your confidence. We appreciate your help. :)</p>
       <% else %>
-          <p>Please log in using button above.</p>
+          This application will show you people on Facebook who share same or similar interests with you on the basis of pages you like on Facebook.<br>
+          Basically, this is small student project that uses simple algorithms to provide you this information.<br>
+          Please log into Facebook using button above to use this app.
       <% end %>
     </section>
-
 
     <% if @user %>
     <section id="samples" class="clearfix">
           <h1>Please take a look at informations taken from your profile:</h1>
 
           <div class="list">
-            <h3>Friends using this app</h3>
+            <h3>Some friends using this app</h3>
             <ul class="friends">
               <% @friends.each do |friend| %>
                 <li>
@@ -282,7 +283,7 @@
         </div>
 
           <div class="list">
-            <h3>Things you like</h3>
+            <h3>Part of things you like</h3>
             <ul class="things">
               <% @likes.each do |like| %>
                 <li>
@@ -296,6 +297,10 @@
           </div>
 
         </section>
+    <% else %>
+      <section id="samples" class="clearfix">
+        <p>If you have any questions contact me on <i>gnovak.boskov@gmail.com</i>. <b><a href="./privacypolicy">Privacy policy</a></b>.</p>
+      </section>
     <% end %>
 
   </body>
