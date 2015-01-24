@@ -4,7 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
 
-    <title><%= @app['name'] %></title>
+    <% if access_token %>
+      <title><%= @app['name'] %></title>
+    <% else %>
+        <title> similarity </title>
+    <% end %>
     <link rel="stylesheet" href="stylesheets/screen.css" media="Screen" type="text/css" />
     <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-width: 480px), only screen and (max-device-width: 480px)" type="text/css" />
 
@@ -17,13 +21,25 @@
     <!-- over facebook.  You should fill these tags in with      -->
     <!-- your data.  To learn more about Open Graph, visit       -->
     <!-- 'https://developers.facebook.com/docs/opengraph/'       -->
-    <meta property="og:title" content="<%= @app['name'] %>" />
+    <% if access_token %>
+        <meta property="og:title" content="<%= @app['name'] %>" />
+    <% else %>
+        <meta property="og:title" content="similarity" />
+    <% end %>
     <meta property="og:type" content="website" />
     <meta property="og:url" content="<%= url %>" />
     <meta property="og:image" content="<%= url('/logo.png') %>" />
-    <meta property="og:site_name" content="<%= @app['name'] %>" />
+    <% if access_token %>
+        <meta property="og:site_name" content="<%= @app['name'] %>" />
+    <% else %>
+        <meta property="og:site_name" content="similarity" />
+    <% end %>
     <meta property="og:description" content="Similarity" />
-    <meta property="fb:app_id" content="<%= @app['name'] %>" />
+    <% if access_token %>
+        <meta property="fb:app_id" content="<%= @app['name'] %>" />
+    <% else %>
+        <meta property="fb:app_id" content="similarity" />
+    <% end %>
 
     <script type="text/javascript" src="/javascripts/jquery-1.7.1.min.js"></script>
 
@@ -81,6 +97,7 @@
           );
         });
       });
+
     </script>
 
     <!--[if IE]>
@@ -94,29 +111,90 @@
   <body>
     <div id="fb-root"></div>
     <script type="text/javascript">
+
       window.fbAsyncInit = function() {
         FB.init({
-          appId      : "<%= @app['id'] %>",                     // App ID
+          appId      : "<%= ENV["FACEBOOK_APP_ID"] %>",         // App ID
           channelUrl : "<%= url_no_scheme('/channel.html') %>", // Channel File
           status     : true,                                    // check login status
           cookie     : true,                                    // enable cookies to allow the server to access the session
           xfbml      : true                                     // parse XFBML
         });
 
-		console.log("App ID je " + <%= @app['id']%>);
         // Listen to the auth.login which will be called when the user logs in
         // using the Login button
-        FB.Event.subscribe('auth.login', function(response) {
-          // We want to reload the page now so Ruby can read the cookie that the
-          // Javascript SDK sat. But we don't want to use
-          // window.location.reload() because if this is in a canvas there was a
-          // post made to this page and a reload will trigger a message to the
-          // user asking if they want to send data again.
-          //window.location = window.location; // ne koristim taj client side login
+//        FB.Event.subscribe('auth.login', function(response) {
+//          // We want to reload the page now so Ruby can read the cookie that the
+//          // Javascript SDK sat. But we don't want to use
+//          // window.location.reload() because if this is in a canvas there was a
+//          // post made to this page and a reload will trigger a message to the
+//          // user asking if they want to send data again.
+//          //window.location = window.location; // ne koristim taj client side login
+//        });
+
+        FB.getLoginStatus(function(response) {
+          statusChangeCallbackNoReload(response);
         });
 
         FB.Canvas.setAutoGrow();
+
       };
+
+      function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        var expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + "; " + expires;
+      }
+
+      // This function is called when someone finishes with the Login
+      // Button.  See the onlogin handler attached to it in the sample
+      // code below.
+      function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+          statusChangeCallback(response);
+        });
+      }
+
+      // This is called with the results from from FB.getLoginStatus().
+      function statusChangeCallback(response) {
+        console.log('statusChangeCallback');
+        console.log(response);
+        // The response object is returned with a status field that lets the
+        // app know the current login status of the person.
+        // Full docs on the response object can be found in the documentation
+        // for FB.getLoginStatus().
+        if (response.status === 'connected') {
+          // Logged into your app and Facebook.
+          // set access token to session cookie and refresh page so ruby can read it
+          var accessToken = response.authResponse.accessToken;
+          setCookie("access_token", accessToken, 10 * 365);
+          window.location = window.location;
+        } else if (response.status === 'not_authorized') {
+          // The person is logged into Facebook, but not your app.
+          document.getElementById('status').innerHTML = 'Please log ' +
+          'into this app.';
+        } else {
+          // The person is not logged into Facebook, so we're not sure if
+          // they are logged into this app or not.
+          document.getElementById('status').innerHTML = 'Please log ' +
+          'into Facebook.';
+        }
+      }
+
+      function statusChangeCallbackNoReload(response) {
+        console.log('statusChangeCallback');
+        console.log(response);
+        if (response.status === 'connected') {
+          // nothing
+        } else if (response.status === 'not_authorized') {
+          document.getElementById('status').innerHTML = 'Please log ' +
+          'into this app.';
+        } else {
+          document.getElementById('status').innerHTML = 'Please log ' +
+          'into Facebook.';
+        }
+      }
 
       // Load the SDK Asynchronously
       (function(d, s, id) {
@@ -161,11 +239,15 @@
       <% else %>
         <div>
           <h1>Welcome</h1>
-          <div class="fb-login-button" data-scope="<%= FACEBOOK_SCOPE %>">Log In</div>
+          <div class="fb-login-button" data-scope="<%= FACEBOOK_SCOPE %>" onlogin="checkLoginState();">Log In</div>
 
         </div>
 
       <% end %>
+
+      <div id="status">
+      </div>
+
     </header>
 
     <section id="get-started">

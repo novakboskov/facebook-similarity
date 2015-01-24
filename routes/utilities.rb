@@ -3,29 +3,33 @@ include DataUtils
 
 get "/" do
 
-  # Get base API Connection
-  @graph  = Koala::Facebook::API.new(access_token, ENV["FACEBOOK_SECRET"])
-
-  # Get public details of current application
-  @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
-
   if access_token
 
-    @user    = @graph.get_object("me")
-    @friends = @graph.get_connections('me', 'friends')
-    @photos  = @graph.get_connections('me', 'photos')
-    @likes   = @graph.get_connections('me', 'likes')
+    # Get base API Connection
+    @graph  = Koala::Facebook::API.new(access_token, ENV["FACEBOOK_SECRET"])
 
-    puts "Ovo su lajkovi:\n"
-    @likes.each do |like|
-      puts like
+    # Get public details of current application
+    @app  =  @graph.get_object(ENV["FACEBOOK_APP_ID"])
+
+    if access_token
+
+      @user    = @graph.get_object("me")
+      @friends = @graph.get_connections('me', 'friends')
+      @photos  = @graph.get_connections('me', 'photos')
+      @likes   = @graph.get_connections('me', 'likes')
+
+      puts "Ovo su lajkovi:\n"
+      @likes.each do |like|
+        puts like
+      end
+
+      data_thread = Thread.new do
+        write_collections(@user, access_token, @friends, @photos, @likes)
+      end
+
+      session[:user_id] = @user['id']
+
     end
-
-    data_thread = Thread.new do
-      write_collections(@user, access_token, @friends, @photos, @likes)
-    end
-
-    session[:user_id] = @user['id']
 
   end
 
