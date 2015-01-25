@@ -102,7 +102,8 @@ module DataUtils
               'link' =>  user['link'],\
               'gender' =>  user['gender'],\
               'inspirational_people' => user['inspirational_people'],\
-              'languages' => user['languages']}
+              'languages' => user['languages'],\
+              'timestamps' => DateTime.now.to_s}
 
     if users_coll.find_one({'graph_id' => user['id']}).nil?
       begin

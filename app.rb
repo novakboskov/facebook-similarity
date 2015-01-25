@@ -3,6 +3,7 @@ require 'koala'
 require 'mongo'
 include Mongo
 require './helpers/helpers'
+require 'date'
 
 # enable foreman to write on stdout non buffered way
 $stdout.sync = true
@@ -14,6 +15,7 @@ configure do
   set :raise_errors, true
   set :show_exceptions, false
   set :long_lived_token_max_time, 259200
+  set :record_active_days, 3
 
   # mongolab configuration
   mongo_uri = ENV['MONGOLAB_URI']

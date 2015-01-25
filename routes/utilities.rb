@@ -55,6 +55,7 @@ end
 before '/calculate' do
 
   unless session[:user_id]
+    # hit calculate directly
     puts "/calculate BUT NO session[:user_id], GO REDIRECT TO /"
     redirect '/'
   end
@@ -67,6 +68,25 @@ before '/calculate' do
     puts "CEKAM DA SE UPISE #{session[:user_id]}"
     next
   end
+
+  puts "SAD DEO O STAROSTI"
+  unless users.find_one({'graph_id' => session[:user_id]}).nil?
+    # user exists in DB but his record is old one
+    # wait to actual thread write new one
+
+    user_timestamps = \
+      DateTime.parse users.find_one({'graph_id' => session[:user_id]})['timestamps'].to_s
+
+    puts "PROVERAVAM STAROST ZAPISA O #{session[:user_id]}"
+
+    while !record_fresh?(user_timestamps)
+      puts "ZAPIS O #{session[:user_id]} JE SUVISE STAR, CEKAM DA UPISE NOVI"
+      user_timestamps = \
+        DateTime.parse users.find_one({'graph_id' => session[:user_id]})['timestamps'].to_s
+      next
+    end
+  end
+
 end
 
 # after filter is blocking load :index

@@ -1,4 +1,10 @@
 module Helpers
+
+  def record_fresh?(date_time)
+    time = DateTime.parse(date_time.to_s).to_time
+    time.to_i.between?(Time.now.to_i - (settings.record_active_days*24*60*60), Time.now.to_i)
+  end
+
   def host
     request.env['HTTP_HOST']
   end
@@ -37,7 +43,10 @@ module Helpers
       # access_token_is present exchange it for an long lived
       # and put it in session and cookies
       exchanged_token_info = authenticator_no_redirect.exchange_access_token_info request.cookies['access_token']
-      session[:access_token] = request.cookies['access_token'] = exchanged_token_info['access_token']
+      puts "EXCHANGED_TOKEN_INFO EXPIRES = #{exchanged_token_info['expires']}"
+      response.delete_cookie 'access_token'
+      response.set_cookie 'access_token', exchanged_token_info['access_token']
+      session[:access_token] = exchanged_token_info['access_token']
     else
       # access_token is not present
       session[:access_token] = request.cookies['access_token']

@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="21a6cef7-7729-49e6-977b-886da187cb41" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.rb" afterPath="$PROJECT_DIR$/app.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/facebook.rb" afterPath="$PROJECT_DIR$/routes/facebook.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/data_utils.rb" afterPath="$PROJECT_DIR$/modules/data_utils.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db_testing.rb" afterPath="$PROJECT_DIR$/db_testing.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/helpers/helpers.rb" afterPath="$PROJECT_DIR$/helpers/helpers.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/utilities.rb" afterPath="$PROJECT_DIR$/routes/utilities.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="facebook-template-ruby.iws" />
@@ -83,21 +85,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="app.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6557377" vertical-offset="455" max-vertical-offset="1065">
-              <caret line="57" column="41" selection-start-line="57" selection-start-column="41" selection-end-line="57" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.ru" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config.ru">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="195">
-              <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="485" max-vertical-offset="1095">
+              <caret line="59" column="4" selection-start-line="59" selection-start-column="4" selection-end-line="59" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -126,8 +118,18 @@
       <file leaf-file-name="utilities.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/utilities.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1200">
-              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="770" max-vertical-offset="1500">
+              <caret line="71" column="26" selection-start-line="71" selection-start-column="26" selection-end-line="71" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="db_testing.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db_testing.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
+              <caret line="17" column="59" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -145,11 +147,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="helpers.rb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="helpers.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/helpers/helpers.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="155" max-vertical-offset="960">
-              <caret line="39" column="101" selection-start-line="39" selection-start-column="101" selection-end-line="39" selection-end-column="101" />
+            <state vertical-scroll-proportion="0.75409836" vertical-offset="260" max-vertical-offset="1095">
+              <caret line="48" column="28" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -170,8 +172,8 @@
       <file leaf-file-name="data_utils.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/data_utils.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1147" max-vertical-offset="2220">
-              <caret line="138" column="10" selection-start-line="138" selection-start-column="10" selection-end-line="138" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1177" max-vertical-offset="2235">
+              <caret line="105" column="48" selection-start-line="105" selection-start-column="48" selection-end-line="105" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -204,21 +206,21 @@
         <option value="$PROJECT_DIR$/Procfile" />
         <option value="$PROJECT_DIR$/test_db.rb" />
         <option value="$PROJECT_DIR$/noca.rb" />
-        <option value="$PROJECT_DIR$/db_testing.rb" />
         <option value="$PROJECT_DIR$/Modules/data_utils.rb" />
         <option value="$PROJECT_DIR$/public/privacypolicy.htm" />
         <option value="$PROJECT_DIR$/modules/helpers.rb" />
         <option value="$PROJECT_DIR$/routes/init.rb" />
         <option value="$PROJECT_DIR$/routes/info.rb" />
         <option value="$PROJECT_DIR$/modules/algorithms.rb" />
-        <option value="$PROJECT_DIR$/modules/data_utils.rb" />
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/views/calculate.erb" />
         <option value="$PROJECT_DIR$/views/index.erb" />
         <option value="$PROJECT_DIR$/routes/facebook.rb" />
-        <option value="$PROJECT_DIR$/helpers/helpers.rb" />
-        <option value="$PROJECT_DIR$/routes/utilities.rb" />
+        <option value="$PROJECT_DIR$/modules/data_utils.rb" />
         <option value="$PROJECT_DIR$/app.rb" />
+        <option value="$PROJECT_DIR$/db_testing.rb" />
+        <option value="$PROJECT_DIR$/routes/utilities.rb" />
+        <option value="$PROJECT_DIR$/helpers/helpers.rb" />
       </list>
     </option>
   </component>
@@ -430,7 +432,7 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="SearchEverywhereHistoryKey" value="app&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/app.rb&#10;hel&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/helpers/helpers.rb&#10;he&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/helpers/helpers.rb&#10;utili&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/utilities.rb&#10;uti&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/utilities.rb&#10;data&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/modules/data_utils.rb&#10;face&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/facebook.rb&#10;utils&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/modules/data_utils.rb&#10;inde&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/views/index.erb&#10;uni&#9;null&#9;null&#10;calc&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/views/calculate.erb&#10;ut&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/utilities.rb" />
+    <property name="SearchEverywhereHistoryKey" value="hel&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/helpers/helpers.rb&#10;utili&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/utilities.rb&#10;he&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/helpers/helpers.rb&#10;ut&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/utilities.rb&#10;d&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/db_testing.rb&#10;te&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/db_testing.rb&#10;uti&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/utilities.rb&#10;app&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/app.rb&#10;help&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/helpers/helpers.rb&#10;data&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/modules/data_utils.rb&#10;face&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/facebook.rb&#10;utils&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/modules/data_utils.rb&#10;inde&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/views/index.erb&#10;uni&#9;null&#9;null&#10;calc&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/views/calculate.erb" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -819,13 +821,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db_testing.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2704918" vertical-offset="0" max-vertical-offset="610">
-          <caret line="11" column="58" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backup_Procfile">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="623">
@@ -912,22 +907,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config.ru">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
-          <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Procfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
-          <caret line="0" column="77" selection-start-line="0" selection-start-column="77" selection-end-line="0" selection-end-column="77" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Gemfile">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.28985506" vertical-offset="0" max-vertical-offset="621">
@@ -971,34 +950,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config.ru">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14446227" vertical-offset="0" max-vertical-offset="623">
+          <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Procfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
+          <caret line="0" column="77" selection-start-line="0" selection-start-column="77" selection-end-line="0" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modules/data_utils.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1147" max-vertical-offset="2220">
-          <caret line="138" column="10" selection-start-line="138" selection-start-column="10" selection-end-line="138" selection-end-column="10" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1177" max-vertical-offset="2235">
+          <caret line="105" column="48" selection-start-line="105" selection-start-column="48" selection-end-line="105" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/helpers/helpers.rb">
+    <entry file="file://$PROJECT_DIR$/db_testing.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="155" max-vertical-offset="960">
-          <caret line="39" column="101" selection-start-line="39" selection-start-column="101" selection-end-line="39" selection-end-column="101" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/utilities.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1200">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
+          <caret line="17" column="59" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="59" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6557377" vertical-offset="455" max-vertical-offset="1065">
-          <caret line="57" column="41" selection-start-line="57" selection-start-column="41" selection-end-line="57" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="485" max-vertical-offset="1095">
+          <caret line="59" column="4" selection-start-line="59" selection-start-column="4" selection-end-line="59" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/utilities.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="770" max-vertical-offset="1500">
+          <caret line="71" column="26" selection-start-line="71" selection-start-column="26" selection-end-line="71" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/helpers/helpers.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.75409836" vertical-offset="260" max-vertical-offset="1095">
+          <caret line="48" column="28" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="28" />
           <folding />
         </state>
       </provider>
