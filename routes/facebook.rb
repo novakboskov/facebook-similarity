@@ -18,6 +18,7 @@ get "/auth/facebook" do
 end
 
 get '/auth/facebook/callback' do
+  puts "REDIRECTED TO CALLBACK FOR AUTHENTICATOR CALLBACK"
   session[:access_token] = authenticator.get_access_token(params[:code])
   redirect '/'
 end

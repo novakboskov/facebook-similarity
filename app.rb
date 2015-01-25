@@ -13,6 +13,7 @@ configure do
   set :session_secret, 'something secret'
   set :raise_errors, true
   set :show_exceptions, false
+  set :long_lived_token_max_time, 259200
 
   # mongolab configuration
   mongo_uri = ENV['MONGOLAB_URI']
@@ -50,8 +51,16 @@ end
 # the facebook session expired! reset ours and restart the process
 error(Koala::Facebook::APIError) do
   puts "ERROR IS " + env['sinatra.error'].message
-  session[:access_token] = nil
-  redirect "/auth/facebook"
+
+  if env['sinatra.error'].fb_error_code.to_s == '190' && env['sinatra.error'].fb_error_subcode.to_s == '466'
+    # Error validating access token: The session was invalidated explicitly using an API call
+    session[:access_token] = nil
+    response.delete_cookie 'access_token'
+    redirect '/'
+  else
+    session[:access_token] = nil
+    redirect "/auth/facebook"
+  end
 end
 
 require_relative 'routes/init'

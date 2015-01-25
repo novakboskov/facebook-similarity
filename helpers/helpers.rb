@@ -19,6 +19,10 @@ module Helpers
     @authenticator ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"], url("/auth/facebook/callback"))
   end
 
+  def authenticator_no_redirect
+    @authenticator_no_redirect ||= Koala::Facebook::OAuth.new(ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_SECRET"])
+  end
+
   # using this in no-javascript authentication method
   def access_token_from_cookie
     #authenticator.get_user_info_from_cookies(request.cookies)['access_token']
@@ -29,8 +33,16 @@ module Helpers
   end
 
   def access_token
-    puts "SESSION_ACCESS_TOKEN_COOKIE from helper = #{request.cookies['access_token']}"
-    session[:access_token] = request.cookies['access_token']
+    if session[:access_token]
+      # access_token_is present exchange it for an long lived
+      # and put it in session and cookies
+      exchanged_token_info = authenticator_no_redirect.exchange_access_token_info request.cookies['access_token']
+      session[:access_token] = request.cookies['access_token'] = exchanged_token_info['access_token']
+    else
+      # access_token is not present
+      session[:access_token] = request.cookies['access_token']
+    end
+
   end
 
   def users
