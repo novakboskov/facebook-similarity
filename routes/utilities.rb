@@ -39,13 +39,12 @@ end
 
 get "/calculate" do
 
-  # if session[:user_id] is set show data
-  # if not redirect user to '/'
+  @user = users.find_one({'graph_id' => session[:user_id]})
 
   # read calculated data for the corresponding user to some @user_calculated_data
   # visualize it with some erb
 
-  "<p>Under construction</p>"
+  erb :calculate
 end
 
 # used by Canvas apps - redirect the POST to be a regular GET
@@ -54,6 +53,12 @@ post "/" do
 end
 
 before '/calculate' do
+
+  unless session[:user_id]
+    puts "/calculate BUT NO session[:user_id], GO REDIRECT TO /"
+    redirect '/'
+  end
+
   # srecnije resenje
   # dodati jos timestamps user-u pa ga redirektovati na '/' ako su suvise stari njegovi podaci
   # user treba u data_utils da se upisuje poslednji

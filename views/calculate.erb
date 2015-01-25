@@ -4,11 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
 
-    <% if access_token %>
-      <title><%= @app['name'] %></title>
-    <% else %>
-        <title> similarity </title>
-    <% end %>
+
+    <title> similarity </title>
     <link rel="stylesheet" href="stylesheets/screen.css" media="Screen" type="text/css" />
     <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-width: 480px), only screen and (max-device-width: 480px)" type="text/css" />
 
@@ -21,25 +18,12 @@
     <!-- over facebook.  You should fill these tags in with      -->
     <!-- your data.  To learn more about Open Graph, visit       -->
     <!-- 'https://developers.facebook.com/docs/opengraph/'       -->
-    <% if access_token %>
-        <meta property="og:title" content="<%= @app['name'] %>" />
-    <% else %>
-        <meta property="og:title" content="similarity" />
-    <% end %>
+    <meta property="og:title" content="similarity" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="<%= url %>" />
-    <meta property="og:image" content="<%= url('/logo.png') %>" />
-    <% if access_token %>
-        <meta property="og:site_name" content="<%= @app['name'] %>" />
-    <% else %>
-        <meta property="og:site_name" content="similarity" />
-    <% end %>
+    <meta property="og:image" content="<%= url('/logo.png') %>" /><meta property="og:site_name" content="similarity" />
     <meta property="og:description" content="Similarity" />
-    <% if access_token %>
-        <meta property="fb:app_id" content="<%= @app['name'] %>" />
-    <% else %>
-        <meta property="fb:app_id" content="similarity" />
-    <% end %>
+    <meta property="fb:app_id" content="similarity" />
 
     <script type="text/javascript" src="/javascripts/jquery-1.7.1.min.js"></script>
 
@@ -212,8 +196,6 @@
           <div>
             <h1>Welcome, <strong><%= @user['name'] %></strong></h1>
             <p class="tagline">
-              This is your app
-              <a href="<%= @app['@app'] %>"><%= @app['name'] %></a>
             </p>
             <div id="share-app">
               <p>Share your app:</p>
@@ -236,12 +218,6 @@
               </ul>
             </div>
           </div>
-      <% else %>
-        <div>
-          <h1>Welcome to <b>similarity</b> start page</h1>
-          <div class="fb-login-button" data-scope="<%= FACEBOOK_SCOPE %>" onlogin="checkLoginState();">Log In</div>
-
-        </div>
 
       <% end %>
 
@@ -253,56 +229,8 @@
     <section id="get-started">
       <% if @user %>
         <p>Thank you for your confidence. We appreciate your help. :)</p>
-      <% else %>
-          This application will show you people on Facebook who share same or similar interests with you on the basis of pages you like on Facebook.<br>
-          Basically, this is small student project that uses simple algorithms to provide you this information.<br>
-          Please log into Facebook using button above to use this app.
       <% end %>
     </section>
-
-    <% if @user %>
-    <section id="samples" class="clearfix">
-          <h1>Please take a look at informations taken from your profile:</h1>
-          <h1><a href="./calculate">Start Similarity!</a></h1>
-
-          <div class="list">
-            <h3>Some friends using this app</h3>
-            <ul class="friends">
-              <% @friends.each do |friend| %>
-                <li>
-                  <a href="#" onclick="window.open('http://www.facebook.com/<%= friend['id']%>')">
-                    <img src="https://graph.facebook.com/<%= friend['id'] %>/picture?type=square" alt="<%= friend['name'] %>">
-                    <%= friend['name'] %>
-                  </a>
-                </li>
-              <% end %>
-            </ul>
-          </div>
-
-        <div class="list">
-          <h3>&nbsp;</h3>
-        </div>
-
-          <div class="list">
-            <h3>Part of things you like</h3>
-            <ul class="things">
-              <% @likes.each do |like| %>
-                <li>
-                  <a href="#" onclick="window.open('http://www.facebook.com/<%= like['id'] %>')">
-                    <img src="https://graph.facebook.com/<%= like['id'] %>/picture?type=square" alt="<%= like['name'] %>">
-                    <%= like['name'] %>
-                  </a>
-                </li>
-              <% end %>
-            </ul>
-          </div>
-
-        </section>
-    <% else %>
-      <section id="samples" class="clearfix">
-        <p>If you have any questions contact me on <i>gnovak.boskov@gmail.com</i>. <b><a href="./privacypolicy">Privacy policy</a></b>.</p>
-      </section>
-    <% end %>
 
   </body>
 </html>
