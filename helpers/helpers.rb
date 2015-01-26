@@ -65,4 +65,9 @@ module Helpers
   def friends
     settings.db.collection("friends")
   end
+
+  def data_vectors
+    settings.db.collection("data_vectors")
+  end
+
 end

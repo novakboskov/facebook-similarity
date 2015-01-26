@@ -1,3 +1,6 @@
+require_relative 'algorithms'
+include Algorithms
+
 module DataUtils
   def data_pagination(likes, friends)
 
@@ -103,6 +106,7 @@ module DataUtils
               'gender' =>  user['gender'],\
               'inspirational_people' => user['inspirational_people'],\
               'languages' => user['languages'],\
+              'data_vector' => '',\
               'timestamps' => DateTime.now.to_s}
 
     if users_coll.find_one({'graph_id' => user['id']}).nil?
@@ -118,27 +122,76 @@ module DataUtils
   end
 
   # Collects all categories from all the likes
+  # @return [Array] all categories in DB
   def prepare_categories
+    categories_a = []
 
-  end
+    likes.find().each do |like|
+      like['likes_data'].each do |u_like|
+        unless u_like['category_list'].nil?
+          u_like['category_list'].each do |category|
+            categories_a << category['name'] unless categories_a.include?(category['name'])
+          end
+        else
+          categories_a << u_like['category'] unless categories_a.include?(u_like['category'])
+        end
+      end
+    end
 
-  # Prepare all the data required to calculate user related information
-  def prepare
-    prepare_categories
+    categories_a
+
   end
 
   # Makes all the users data vectors
+  # and write every vector to corresponding collection in DB
   def vector
+    categories_a = prepare_categories
+
+    likes.find().each do |like|
+
+      u_categories = []
+
+      like['likes_data'].each do |u_like|
+        unless u_like['category_list'].nil?
+          u_like['category_list'].each do |category|
+            u_categories << category['name']
+          end
+        else
+          u_categories << u_like['category']
+        end
+      end
+
+      u_vector = categories_a.map do |category|
+        category = u_categories.count {|u_category| u_category.downcase == category.downcase}
+      end
+
+      data_vectors.remove({ 'graph_id' => like['user_graph_id'] })
+      data_vectors.insert({ 'graph_id' => like['user_graph_id'], 'data_vector' =>  u_vector.to_s })
+
+    end
 
   end
 
   # Calculates user data based on it's user graph ID
-  # @param id Facebook graph API ID of the user stored in database as graph_id
+  # @param id [String] Facebook graph API ID of the user stored in database as graph_id
   def calculate(id)
-    prepare
-
     vector
-    # calculate Pearson score for given user against all the other users
-    # store the calculated data to database
+    similar_users = []
+    actual_user_vector_s = data_vectors.find_one({'graph_id' => id.to_s})['data_vector']
+    actual_user_vector = \
+        actual_user_vector_s[1, actual_user_vector_s.length-2].split(', ').map {|e| e.to_i}
+
+    puts "ACTUAL USER FROM CALCULATE = #{actual_user_vector}, ID = #{id}"
+
+    data_vectors.find().each do |v|
+      unless v['graph_id'] == id.to_s || v['data_vector'].nil? || v['data_vector'] == ''
+          u_vector = v['data_vector'][1, b.length-2].split(', ').map {|e| e.to_i}
+          similar_users << { pearson_score(actual_user_vector, u_vector) => v['graph_id'] }
+      end
+    end
+
+    similar_users
+
   end
+
 end

@@ -14,11 +14,13 @@ end
 # koristi se samo kada je API error
 get "/auth/facebook" do
   session[:access_token] = nil
+  response.delete_cookie 'access_token' #
   redirect authenticator.url_for_oauth_code(:permissions => FACEBOOK_SCOPE)
 end
 
 get '/auth/facebook/callback' do
   puts "REDIRECTED TO CALLBACK FOR AUTHENTICATOR CALLBACK"
   session[:access_token] = authenticator.get_access_token(params[:code])
+  response.set_cookie 'access_token', session[:access_token] #
   redirect '/'
 end

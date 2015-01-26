@@ -41,6 +41,10 @@ get "/calculate" do
 
   @user = users.find_one({'graph_id' => session[:user_id]})
 
+  @similar_users = calculate session[:user_id]
+
+  puts "SIMILAR USERS ARE : #{@similar_users}"
+
   # read calculated data for the corresponding user to some @user_calculated_data
   # visualize it with some erb
 
