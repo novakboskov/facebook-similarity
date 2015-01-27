@@ -80,9 +80,7 @@ module Helpers
     inter = []
     likes_1[0]['likes_data'].each do |l1|
       likes_2[0]['likes_data'].each do |l2|
-        if l1['id'].to_i == l2['id'].to_i
-          inter << l1
-        end
+        inter << l1 if l1['id'].to_i == l2['id'].to_i
       end
     end
 
