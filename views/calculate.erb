@@ -192,7 +192,7 @@
 
     <header class="clearfix">
       <% if @user %>
-          <p id="picture" style="background-image: url(https://graph.facebook.com/<%= @user['id'] %>/picture?type=normal)"></p>
+          <p id="picture" style="background-image: url(https://graph.facebook.com/<%= @user['graph_id'] %>/picture?type=normal)"></p>
           <div>
             <h1>Welcome, <strong><%= @user['name'] %></strong></h1>
             <p class="tagline">
@@ -203,11 +203,6 @@
                 <li>
                   <a href="#" class="facebook-button" id="postToWall" data-url="<%= url %>">
                     <span class="plus">Post to Wall</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="facebook-button speech-bubble" id="sendToFriends" data-url="<%= url %>">
-                    <span class="speech-bubble">Send Message</span>
                   </a>
                 </li>
                 <li>
@@ -228,9 +223,47 @@
 
     <section id="get-started">
       <% if @user %>
-        <p>Thank you for your confidence. We appreciate your help. :)</p>
+        <p>Take a look at results! :)</p>
       <% end %>
     </section>
+
+    <section id="samples" class="clearfix">
+      <h1>Users similar to you:</h1>
+    </section>
+
+    <p>
+    <% unless @similar_users.nil? %>
+        <div class="list">
+          <ol class="friends">
+            <% @similar_users.take(10).each do |user| %>
+                <li>
+                  <div style="background-color:#CCCC33; overflow: auto;">
+                    <h2>User:</h2>
+                    <a href="#" onclick="window.open('http://www.facebook.com/<%= user.keys[0]%>')">
+                      <img src="https://graph.facebook.com/<%= user.keys[0] %>/picture?type=square" alt="<%= user.keys[0] %>">
+                      <%= @similar_users_info[user.keys[0].to_s]['name'] %>
+                    </a>
+                  </div>
+                  <div style="background-color:#99FF99; overflow: auto;">
+                  <h3>Similar likes with you:</h3>
+                    <ul class="friends">
+                      <% same_likes(@user['graph_id'], user.keys[0]).each do |like| %>
+                          <li>
+                            <a href="#" onclick="window.open('http://www.facebook.com/<%= like['id']%>')">
+                              <img src="https://graph.facebook.com/<%= like['id'] %>/picture?type=square" alt="<%= like['id'] %>">
+                              <%= like['name'] %>
+                            </a>
+                          </li>
+                      <% end %>
+                    </ul>
+                  </div>
+                </li>
+                <hr>
+            <% end %>
+          </ol>
+        </div>
+    <% end %>
+    </p>
 
   </body>
 </html>

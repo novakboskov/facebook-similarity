@@ -130,15 +130,15 @@ module DataUtils
       like['likes_data'].each do |u_like|
         unless u_like['category_list'].nil?
           u_like['category_list'].each do |category|
-            categories_a << category['name'] unless categories_a.include?(category['name'])
+            categories_a << category['name'].downcase unless categories_a.include?(category['name'].downcase)
           end
         else
-          categories_a << u_like['category'] unless categories_a.include?(u_like['category'])
+          categories_a << u_like['category'].downcase unless categories_a.include?(u_like['category'].downcase)
         end
       end
     end
 
-    categories_a
+    categories_a.uniq
 
   end
 
@@ -177,6 +177,7 @@ module DataUtils
   def calculate(id)
     vector
     similar_users = []
+    similar_users_info = {}
     actual_user_vector_s = data_vectors.find_one({'graph_id' => id.to_s})['data_vector']
     actual_user_vector = \
         actual_user_vector_s[1, actual_user_vector_s.length-2].split(', ').map {|e| e.to_i}
@@ -184,13 +185,19 @@ module DataUtils
     puts "ACTUAL USER FROM CALCULATE = #{actual_user_vector}, ID = #{id}"
 
     data_vectors.find().each do |v|
-      unless v['graph_id'] == id.to_s || v['data_vector'].nil? || v['data_vector'] == ''
-          u_vector = v['data_vector'][1, b.length-2].split(', ').map {|e| e.to_i}
-          similar_users << { pearson_score(actual_user_vector, u_vector) => v['graph_id'] }
+      #unless v['graph_id'] == id.to_s || v['data_vector'].nil? || v['data_vector'] == ''
+      unless v['data_vector'].nil? || v['data_vector'] == ''
+          u_vector = v['data_vector']
+          u_vector_a = u_vector[1, u_vector.length-2].split(', ').map {|e| e.to_i}
+          similar_users << { v['graph_id'] => pearson_score(actual_user_vector, u_vector_a) }
+
+          full_user_info = users.find().select {|rec| rec['graph_id'] == v['graph_id']}
+          similar_users_info.merge!( { v['graph_id'] => full_user_info[0] } )
       end
     end
 
-    similar_users
+    similar_users.sort! { |a, b| b.values[0].to_f <=> a.values[0].to_f }
+    return similar_users, similar_users_info
 
   end
 

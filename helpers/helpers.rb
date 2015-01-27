@@ -70,4 +70,13 @@ module Helpers
     settings.db.collection("data_vectors")
   end
 
+  def same_likes(id_1, id_2)
+
+    likes_1 = likes.find().select {|rec| rec['user_graph_id'] == id_1.to_s}
+    likes_2 = likes.find().select {|rec| rec['user_graph_id'] == id_2.to_s}
+
+    likes_1[0]['likes_data'] & likes_2[0]['likes_data']
+
+  end
+
 end

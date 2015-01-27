@@ -41,7 +41,9 @@ get "/calculate" do
 
   @user = users.find_one({'graph_id' => session[:user_id]})
 
-  @similar_users = calculate session[:user_id]
+  @similar_users, @similar_users_info = calculate session[:user_id]
+
+  puts "SIMILAR_USERS_INFO = #{@similar_users_info}"
 
   puts "SIMILAR USERS ARE : #{@similar_users}"
 
