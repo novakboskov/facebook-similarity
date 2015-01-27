@@ -185,8 +185,8 @@ module DataUtils
     puts "ACTUAL USER FROM CALCULATE = #{actual_user_vector}, ID = #{id}"
 
     data_vectors.find().each do |v|
-      #unless v['graph_id'] == id.to_s || v['data_vector'].nil? || v['data_vector'] == ''
-      unless v['data_vector'].nil? || v['data_vector'] == ''
+      unless v['graph_id'] == id.to_s || v['data_vector'].nil? || v['data_vector'] == ''
+      #unless v['data_vector'].nil? || v['data_vector'] == ''
           u_vector = v['data_vector']
           u_vector_a = u_vector[1, u_vector.length-2].split(', ').map {|e| e.to_i}
           similar_users << { v['graph_id'] => pearson_score(actual_user_vector, u_vector_a) }
