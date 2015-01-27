@@ -2,11 +2,11 @@ require 'mongo'
 include Mongo
 require 'date'
 
-# # mongolab configuration
-# mongo_uri = "mongodb://heroku_app32513773:43e9143cv2j1j4d9v4opirieqj@ds027751.mongolab.com:27751/heroku_app32513773"
-# db_name = mongo_uri[%r{/([^/\?]+)(\?|$)}, 1]
-# client = MongoClient.from_uri(mongo_uri)
-# @db = client.db(db_name)
+# mongolab configuration
+mongo_uri = "mongodb://heroku_app32513773:43e9143cv2j1j4d9v4opirieqj@ds027751.mongolab.com:27751/heroku_app32513773"
+db_name = mongo_uri[%r{/([^/\?]+)(\?|$)}, 1]
+client = MongoClient.from_uri(mongo_uri)
+@db = client.db(db_name)
 
 # puts db.collection('users').find_one({'id' => 2}).nil?
 #
@@ -128,11 +128,35 @@ end
 #
 # puts same_likes(967156229980171, 967156229980171)
 
-h1 = [{'njnja' => 0.21}, {'ono' => 0.321}, {'lop' => 0.91}, {'kome' => 0.43}]
-puts h1[0]
-h1.sort! { |a, b| b.values[0].to_f <=> a.values[0].to_f }
-puts h1[0]
+# h1 = [{'njnja' => 0.21}, {'ono' => 0.321}, {'lop' => 0.91}, {'kome' => 0.43}]
+# puts h1[0]
+# h1.sort! { |a, b| b.values[0].to_f <=> a.values[0].to_f }
+# puts h1[0]
+#
+# a_arr = [1,2,3,4,5,6]
+# puts a_arr.take(10)
 
-a_arr = [1,2,3,4,5,6]
-puts a_arr.take(10)
+likes_1 = @db.collection('likes').find().select {|rec| rec['user_graph_id'] == 978625438818675.to_s}
+likes_2 = @db.collection('likes').find().select {|rec| rec['user_graph_id'] == 967156229980171.to_s}
+
+
+# puts "likes_1 = #{likes_1[0]['likes_data']}"
+# puts "likes_2 = #{likes_2[0]['likes_data'][10].class}"
+
+puts "intersect: #{likes_1[0]['likes_data'] & likes_2[0]['likes_data']}"
+
+inter = []
+likes_1[0]['likes_data'].each do |l1|
+  likes_2[0]['likes_data'].each do |l2|
+    if l1['id'].to_i == l2['id'].to_i
+      inter << l1
+      puts l1['id']
+      puts l2['id']
+    end
+  end
+end
+
+puts "inter = #{inter}"
+
+#puts likes_2.include?( {"category"=>"Musician/band", "name"=>"Third Gallery", "created_time"=>"2013-09-04T18:48:30+0000", "id"=>"42648158335"} )
 

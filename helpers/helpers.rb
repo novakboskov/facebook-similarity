@@ -75,7 +75,18 @@ module Helpers
     likes_1 = likes.find().select {|rec| rec['user_graph_id'] == id_1.to_s}
     likes_2 = likes.find().select {|rec| rec['user_graph_id'] == id_2.to_s}
 
-    likes_1[0]['likes_data'] & likes_2[0]['likes_data']
+    #likes_1[0]['likes_data'] & likes_2[0]['likes_data']
+
+    inter = []
+    likes_1[0]['likes_data'].each do |l1|
+      likes_2[0]['likes_data'].each do |l2|
+        if l1['id'].to_i == l2['id'].to_i
+          inter << l1
+        end
+      end
+    end
+
+    inter
 
   end
 
