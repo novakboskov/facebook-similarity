@@ -67,6 +67,11 @@ error(Koala::Facebook::APIError) do
       response.delete_cookie 'access_token'
       redirect '/'
     end
+
+    session[:access_token] = nil
+    response.delete_cookie 'access_token'
+    redirect '/'
+    
   else
     session[:access_token] = nil
     redirect "/auth/facebook"

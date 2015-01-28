@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="21a6cef7-7729-49e6-977b-886da187cb41" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.rb" afterPath="$PROJECT_DIR$/app.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="facebook-template-ruby.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -87,8 +86,8 @@
       <file leaf-file-name="app.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8" vertical-offset="517" max-vertical-offset="1215">
-              <caret line="67" column="18" selection-start-line="67" selection-start-column="18" selection-end-line="67" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.947541" vertical-offset="517" max-vertical-offset="1290">
+              <caret line="73" column="4" selection-start-line="73" selection-start-column="4" selection-end-line="73" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -119,7 +118,7 @@
       <file leaf-file-name="utilities.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/utilities.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="1590">
+            <state vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="1590">
               <caret line="16" column="56" selection-start-line="16" selection-start-column="56" selection-end-line="16" selection-end-column="56" />
               <folding />
             </state>
@@ -431,7 +430,7 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="SearchEverywhereHistoryKey" value="app&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/app.rb&#10;face&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/facebook.rb&#10;fa&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/facebook.rb&#10;data&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/modules/data_utils.rb&#10;ut&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/utilities.rb&#10;inde&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/views/index.erb&#10;hel&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/helpers/helpers.rb&#10;db&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/db_testing.rb&#10;ca&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/views/calculate.erb&#10;calc&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/views/calculate.erb&#10;help&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/helpers/helpers.rb&#10;utili&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/utilities.rb&#10;uti&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/utilities.rb&#10;cal&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/views/calculate.erb&#10;datau&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/modules/data_utils.rb&#10;util&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/modules/data_utils.rb&#10;da&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/modules/data_utils.rb&#10;u&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/utilities.rb&#10;algo&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/modules/algorithms.rb&#10;dbte&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/db_testing.rb&#10;al&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/modules/algorithms.rb&#10;d&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/db_testing.rb&#10;he&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/helpers/helpers.rb&#10;f&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/facebook.rb&#10;te&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/db_testing.rb&#10;utils&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/modules/data_utils.rb&#10;uni&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="app&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/app.rb&#10;uti&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/utilities.rb&#10;face&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/facebook.rb&#10;fa&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/facebook.rb&#10;data&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/modules/data_utils.rb&#10;ut&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/utilities.rb&#10;inde&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/views/index.erb&#10;hel&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/helpers/helpers.rb&#10;db&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/db_testing.rb&#10;ca&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/views/calculate.erb&#10;calc&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/views/calculate.erb&#10;help&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/helpers/helpers.rb&#10;utili&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/utilities.rb&#10;cal&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/views/calculate.erb&#10;datau&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/modules/data_utils.rb&#10;util&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/modules/data_utils.rb&#10;da&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/modules/data_utils.rb&#10;u&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/utilities.rb&#10;algo&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/modules/algorithms.rb&#10;dbte&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/db_testing.rb&#10;al&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/modules/algorithms.rb&#10;d&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/db_testing.rb&#10;he&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/helpers/helpers.rb&#10;f&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/routes/facebook.rb&#10;te&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/db_testing.rb&#10;utils&#9;FILE&#9;file:///media/novak/Storage/FAKULTET/SoftCoputing/projekat/facebook-template-ruby/modules/data_utils.rb&#10;uni&#9;null&#9;null" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -1001,14 +1000,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/utilities.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="1590">
-          <caret line="16" column="56" selection-start-line="16" selection-start-column="56" selection-end-line="16" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/data_utils.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2491" max-vertical-offset="3135">
@@ -1025,10 +1016,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/utilities.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="1590">
+          <caret line="16" column="56" selection-start-line="16" selection-start-column="56" selection-end-line="16" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8" vertical-offset="517" max-vertical-offset="1215">
-          <caret line="67" column="18" selection-start-line="67" selection-start-column="18" selection-end-line="67" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.947541" vertical-offset="517" max-vertical-offset="1290">
+          <caret line="73" column="4" selection-start-line="73" selection-start-column="4" selection-end-line="73" selection-end-column="4" />
           <folding />
         </state>
       </provider>
