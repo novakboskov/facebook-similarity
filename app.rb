@@ -54,11 +54,19 @@ end
 error(Koala::Facebook::APIError) do
   puts "ERROR IS " + env['sinatra.error'].message
 
-  if env['sinatra.error'].fb_error_code.to_s == '190' && env['sinatra.error'].fb_error_subcode.to_s == '466'
-    # Error validating access token: The session was invalidated explicitly using an API call
-    session[:access_token] = nil
-    response.delete_cookie 'access_token'
-    redirect '/'
+  if env['sinatra.error'].fb_error_code.to_s == '190'
+    if env['sinatra.error'].fb_error_subcode.to_s == '466'
+      # Error validating access token: The session was invalidated explicitly using an API call
+      session[:access_token] = nil
+      response.delete_cookie 'access_token'
+      redirect '/'
+    elsif env['sinatra.error'].fb_error_subcode.to_s == '460'
+      # Error validating access token: Session does not match current stored session.
+      # This may be because the user changed the password since the time the session was created or Facebook has changed the session for security reasons.
+      session[:access_token] = nil
+      response.delete_cookie 'access_token'
+      redirect '/'
+    end
   else
     session[:access_token] = nil
     redirect "/auth/facebook"
