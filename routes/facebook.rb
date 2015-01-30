@@ -24,3 +24,9 @@ get '/auth/facebook/callback' do
   response.set_cookie 'access_token', session[:access_token] #
   redirect '/'
 end
+
+get '/logout' do
+  session[:access_token] = nil
+  response.delete_cookie 'access_token'
+  redirect '/'
+end
