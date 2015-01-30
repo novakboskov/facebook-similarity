@@ -45,6 +45,13 @@ module DataUtils
     friends_coll = settings.db.collection("friends")
     photos_coll = settings.db.collection("photos")
 
+    # decision to write user data if it's data is too old
+
+    unless users.find_one({'graph_id' => session[:user_id]}).nil?
+      actual_timestamps = \
+          DateTime.parse users.find_one({'graph_id' => session[:user_id]})['timestamps'].to_s
+    end
+
     # write likes
 
     likes_array = []
@@ -52,9 +59,14 @@ module DataUtils
 
     likes_doc = {'user_graph_id' => user['id'], 'likes_data' => likes_array}
 
-    if likes_coll.find_one({'user_graph_id' => user['id']}).nil?
+    if likes_coll.find_one({'user_graph_id' => user['id']}).nil?\
+      || (!actual_timestamps.nil? && !record_fresh?(actual_timestamps))
       begin
-        likes_coll.insert(likes_doc)
+        if !actual_timestamps.nil? && !record_fresh?(actual_timestamps)
+          likes_coll.update({ 'user_graph_id' => user['id'] }, likes_doc)
+        else
+          likes_coll.insert(likes_doc)
+        end
       rescue Mongo::OperationFailure => mongo_error
         puts 'Error in insert likes_doc: ' + mongo_error.message
       end
@@ -70,9 +82,14 @@ module DataUtils
     friends_doc = {'user_graph_id' => user['id'], 'friends_data' => friends_array,\
                     'friends_summary' => friends.raw_response['summary']}
 
-    if friends_coll.find_one({'user_graph_id' => user['id']}).nil?
+    if friends_coll.find_one({'user_graph_id' => user['id']}).nil?\
+      || (!actual_timestamps.nil? && !record_fresh?(actual_timestamps))
       begin
-        friends_coll.insert(friends_doc)
+        if !actual_timestamps.nil? && !record_fresh?(actual_timestamps)
+          friends_coll.update({ 'user_graph_id' => user['id'] }, friends_doc)
+        else
+          friends_coll.insert(friends_doc)
+        end
       rescue Mongo::OperationFailure => mongo_error
         puts 'Error in insert friends_doc: ' + mongo_error.message
       end
@@ -109,9 +126,14 @@ module DataUtils
               'data_vector' => '',\
               'timestamps' => DateTime.now.to_s}
 
-    if users_coll.find_one({'graph_id' => user['id']}).nil?
+    if users_coll.find_one({'graph_id' => user['id']}).nil?\
+      || (!actual_timestamps.nil? && !record_fresh?(actual_timestamps))
       begin
-        users_coll.insert(user_doc)
+        if !actual_timestamps.nil? && !record_fresh?(actual_timestamps)
+          users_coll.update({ 'graph_id' => user['id'] }, user_doc)
+        else
+          users_coll.insert(user_doc)
+        end
       rescue Mongo::OperationFailure => mongo_error
         puts 'Error in insert user_doc: ' + mongo_error.message
       end

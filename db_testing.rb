@@ -143,16 +143,28 @@ likes_2 = @db.collection('likes').find().select {|rec| rec['user_graph_id'] == 9
 # puts "likes_1 = #{likes_1[0]['likes_data']}"
 # puts "likes_2 = #{likes_2[0]['likes_data'][10].class}"
 
-puts "intersect: #{likes_1[0]['likes_data'] & likes_2[0]['likes_data']}"
+# puts "intersect: #{likes_1[0]['likes_data'] & likes_2[0]['likes_data']}"
+#
+# inter = []
+# likes_1[0]['likes_data'].each do |l1|
+#   likes_2[0]['likes_data'].each do |l2|
+#     inter << l1 if l1['id'].to_i == l2['id'].to_i
+#   end
+# end
+#
+# puts "inter = #{inter}"
 
-inter = []
-likes_1[0]['likes_data'].each do |l1|
-  likes_2[0]['likes_data'].each do |l2|
-    inter << l1 if l1['id'].to_i == l2['id'].to_i
-  end
-end
+user_doc = {'name' => "Новак Бошков",\
+              'graph_id' =>  '967156229980171',\
+              'access_token' => "CAAIPuh1tFRMBABZAcK7HQlcKoyLZCmmex3P5sLAw6f3EgFXkmywtxaBxRdT6hz61m9A9pAKXjAhdjkBgWIiilz6WEfRayr4kp1ongf4zHwc1tX7zVmhAkZAGPknZBn5bBRKv3l5wapSdCKyovSdWJC2gJi9HAuqdeWRE2rJ1QqW8YxS5VDHWJIXoAE62jYwZD",\
+              'link' =>  "https://www.facebook.com/app_scoped_user_id/967156229980171/",\
+              'gender' =>  "necu da kazem!",\
+              'inspirational_people' => '',\
+              'languages' => '',\
+              'data_vector' => '',\
+              'timestamps' => ''}
 
-puts "inter = #{inter}"
+puts @db.collection('users').update({ 'graph_id' => '967156229980171' }, user_doc)
 
 #puts likes_2.include?( {"category"=>"Musician/band", "name"=>"Third Gallery", "created_time"=>"2013-09-04T18:48:30+0000", "id"=>"42648158335"} )
 

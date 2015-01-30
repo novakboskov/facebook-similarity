@@ -87,10 +87,20 @@ before '/calculate' do
 
     while !record_fresh?(user_timestamps)
       puts "ZAPIS O #{session[:user_id]} JE SUVISE STAR, CEKAM DA UPISE NOVI"
-      user_timestamps = \
-        DateTime.parse users.find_one({'graph_id' => session[:user_id]})['timestamps'].to_s
+      begin
+        user_timestamps = \
+          DateTime.parse users.find_one({'graph_id' => session[:user_id]})['timestamps'].to_s
+
+        puts "NOVI USER_TIMESTAMPS ZA #{session[:user_id]} JE #{user_timestamps.to_s}"
+      rescue
+        # when this code tries to read user but thread was deleted it and not yet updated it
+
+        next
+      end
+
       next
     end
+
   end
 
 end
