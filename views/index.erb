@@ -42,6 +42,7 @@
     <% end %>
 
     <script type="text/javascript" src="/javascripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery.blockUI.js"></script>
 
     <script type="text/javascript">
       function logResponse(response) {
@@ -263,7 +264,7 @@
     <% if @user %>
     <section id="samples" class="clearfix">
           <h1>Please take a look at informations taken from your profile:</h1>
-          <h1><a href="./calculate">Start Similarity!</a></h1>
+          <h1><a href="./calculate" onclick="$.blockUI({ message: '<h1> System calculate your data. Please wait...</h1>' });">Start Similarity!</a></h1>
 
           <div class="list">
             <h3>Some friends using this app</h3>

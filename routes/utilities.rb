@@ -44,11 +44,7 @@ get "/calculate" do
   @similar_users, @similar_users_info = calculate session[:user_id]
 
   puts "SIMILAR_USERS_INFO = #{@similar_users_info}"
-
   puts "SIMILAR USERS ARE : #{@similar_users}"
-
-  # read calculated data for the corresponding user to some @user_calculated_data
-  # visualize it with some erb
 
   erb :calculate
 end
@@ -104,8 +100,3 @@ before '/calculate' do
   end
 
 end
-
-# after filter is blocking load :index
-# after '/' do
-#   write_collections(@user, access_token, @friends, @photos, @likes)
-# end
