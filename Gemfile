@@ -11,3 +11,7 @@ gem "httparty"
 gem "thin"
 gem 'mongo'
 gem 'bson_ext'
+
+#gems for integrating with emacs projectile-ruby
+gem 'pry'
+gem 'pry-doc'

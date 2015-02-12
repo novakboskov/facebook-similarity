@@ -196,7 +196,7 @@ module DataUtils
 
   # Calculates user data based on it's user graph ID
   # @param id [String] Facebook graph API ID of the user stored in database as graph_id
-  def calculate(id)
+  def calculate(id, type)
     vector
     similar_users = []
     similar_users_info = {}
@@ -208,13 +208,30 @@ module DataUtils
 
     data_vectors.find().each do |v|
       unless v['graph_id'] == id.to_s || v['data_vector'].nil? || v['data_vector'] == ''
-          u_vector = v['data_vector']
-          u_vector_a = u_vector[1, u_vector.length-2].split(', ').map {|e| e.to_i}
+        u_vector = v['data_vector']
+        u_vector_a = u_vector[1, u_vector.length-2].split(', ').map {|e| e.to_i}
+        
+        if type.to_i == 0
+          puts "STANDARD ALGORITHM WORKS"
           similar_users << { v['graph_id'] => pearson_score(actual_user_vector, u_vector_a) }
+        elsif type.to_i == 1          
+          puts "ALGORITHM COSIN SIMILARITY WORKS"
+          likes_actual = likes.find_one({"user_graph_id" => id.to_s})
+          likes_user = likes.find_one({"user_graph_id" => v['graph_id']})
 
-          full_user_info = users.find().select {|rec| rec['graph_id'] == v['graph_id']}
-          similar_users_info.merge!( { v['graph_id'] => full_user_info[0] } )
+          # Jaccard index
+          sim_factor = same_likes(id, v['graph_id']).count.to_f / (likes_user['likes_data'].count + likes_actual['likes_data'].count).to_f
+          cosine_sim_factor = cosine_similarity(actual_user_vector, u_vector_a)
+          cosine_sim_factor = 0 if cosine_sim_factor.nan?
+          similar_users << { v['graph_id'] => cosine_sim_factor * sim_factor }
+          
+          puts "DEBUG upisan #{v['graph_id']} => #{cosine_sim_factor * sim_factor}"
+        end
+
+        full_user_info = users.find().select {|rec| rec['graph_id'] == v['graph_id']}
+        similar_users_info.merge!( { v['graph_id'] => full_user_info[0] } )
       end
+
     end
 
     similar_users.sort! { |a, b| b.values[0].to_f <=> a.values[0].to_f }

@@ -263,8 +263,12 @@
 
     <% if @user %>
     <section id="samples" class="clearfix">
-          <h1>Please take a look at informations taken from your profile:</h1>
-          <h1><a href="./calculate" onclick="$.blockUI({ message: '<h1> System calculate your data. Please wait...</h1>' });">Start Similarity!</a></h1>
+	  <h1>Please take a look at informations taken from your profile:</h1>
+	  <select id="type">
+	      <option value="0" selected="selected">Pearson score</option>
+	      <option value="1">Cosine similarity</option>
+	  </select>
+          <h1><a id="calculate" href="./calculate" onclick="$('#calculate').attr('href', $('#calculate').attr('href') + '?type=' + $('#type').val()); $.blockUI({ message: '<h1> System calculate your data. Please wait...</h1>' });">Start Similarity!</a></h1>
 
           <div class="list">
             <h3>Some friends using this app</h3>

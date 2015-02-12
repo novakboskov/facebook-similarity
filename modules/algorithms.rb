@@ -21,4 +21,24 @@ module Algorithms
     return num / den
   end
 
+  def dot_product(a, b)
+    products = a.zip(b).map{|a, b| a * b}
+    products.reduce(0) {|s,p| s + p}
+  end
+
+  def magnitude(point)
+    squares = point.map{|x| x ** 2}
+    Math.sqrt(squares.reduce(0) {|s, c| s + c})
+  end
+
+  # Returns the cosine of the angle between the vectors 
+  #associated with 2 points
+  #
+  # Params:
+  #  - a, b: list of coordinates (float or integer)
+  #
+  def cosine_similarity(a, b)
+    dot_product(a, b) / (magnitude(a) * magnitude(b))
+  end
+
 end

@@ -39,9 +39,20 @@ end
 
 get "/calculate" do
 
+  puts "DEBUG params['type'] = #{params['type']}"
+
+  if params['type'] == 1.to_s
+    puts "DEBUG prepoznao 1."
+    algorithm_type = 1
+    @type = "Cosine similarity"
+  else
+    algorithm_type = 0
+    @type = "Pearson score"
+  end 
+
   @user = users.find_one({'graph_id' => session[:user_id]})
 
-  @similar_users, @similar_users_info = calculate session[:user_id]
+  @similar_users, @similar_users_info = calculate session[:user_id], algorithm_type
 
   puts "SIMILAR_USERS_INFO = #{@similar_users_info}"
   puts "SIMILAR USERS ARE : #{@similar_users}"

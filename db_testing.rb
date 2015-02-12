@@ -1,12 +1,15 @@
+# -*- coding: utf-8 -*-
 require 'mongo'
 include Mongo
 require 'date'
+require_relative 'modules/algorithms'
+include Algorithms
 
-# mongolab configuration
-mongo_uri = "mongodb://heroku_app32513773:43e9143cv2j1j4d9v4opirieqj@ds027751.mongolab.com:27751/heroku_app32513773"
-db_name = mongo_uri[%r{/([^/\?]+)(\?|$)}, 1]
-client = MongoClient.from_uri(mongo_uri)
-@db = client.db(db_name)
+# # mongolab configuration
+# mongo_uri = "mongodb://heroku_app32513773:43e9143cv2j1j4d9v4opirieqj@ds027751.mongolab.com:27751/heroku_app32513773"
+# db_name = mongo_uri[%r{/([^/\?]+)(\?|$)}, 1]
+# client = MongoClient.from_uri(mongo_uri)
+# @db = client.db(db_name)
 
 # puts db.collection('users').find_one({'id' => 2}).nil?
 #
@@ -136,12 +139,11 @@ end
 # a_arr = [1,2,3,4,5,6]
 # puts a_arr.take(10)
 
-likes_1 = @db.collection('likes').find().select {|rec| rec['user_graph_id'] == 978625438818675.to_s}
-likes_2 = @db.collection('likes').find().select {|rec| rec['user_graph_id'] == 967156229980171.to_s}
+# likes_1 = @db.collection('likes').find_one({"user_graph_id" => 967156229980171.to_s})
+# likes_2 = @db.collection('likes').find().select {|rec| rec['user_graph_id'] == 967156229980171.to_s}
 
-
-# puts "likes_1 = #{likes_1[0]['likes_data']}"
-# puts "likes_2 = #{likes_2[0]['likes_data'][10].class}"
+# # puts "likes_2 = #{likes_2[0]['likes_data']}"
+# puts "likes_1 = #{likes_1['likes_data'].count}"
 
 # puts "intersect: #{likes_1[0]['likes_data'] & likes_2[0]['likes_data']}"
 #
@@ -154,17 +156,24 @@ likes_2 = @db.collection('likes').find().select {|rec| rec['user_graph_id'] == 9
 #
 # puts "inter = #{inter}"
 
-user_doc = {'name' => "Новак Бошков",\
-              'graph_id' =>  '967156229980171',\
-              'access_token' => "CAAIPuh1tFRMBABZAcK7HQlcKoyLZCmmex3P5sLAw6f3EgFXkmywtxaBxRdT6hz61m9A9pAKXjAhdjkBgWIiilz6WEfRayr4kp1ongf4zHwc1tX7zVmhAkZAGPknZBn5bBRKv3l5wapSdCKyovSdWJC2gJi9HAuqdeWRE2rJ1QqW8YxS5VDHWJIXoAE62jYwZD",\
-              'link' =>  "https://www.facebook.com/app_scoped_user_id/967156229980171/",\
-              'gender' =>  "necu da kazem!",\
-              'inspirational_people' => '',\
-              'languages' => '',\
-              'data_vector' => '',\
-              'timestamps' => ''}
+# user_doc = {'name' => "Новак Бошков",\
+#               'graph_id' =>  '967156229980171',\
+#               'access_token' => "CAAIPuh1tFRMBABZAcK7HQlcKoyLZCmmex3P5sLAw6f3EgFXkmywtxaBxRdT6hz61m9A9pAKXjAhdjkBgWIiilz6WEfRayr4kp1ongf4zHwc1tX7zVmhAkZAGPknZBn5bBRKv3l5wapSdCKyovSdWJC2gJi9HAuqdeWRE2rJ1QqW8YxS5VDHWJIXoAE62jYwZD",\
+#               'link' =>  "https://www.facebook.com/app_scoped_user_id/967156229980171/",\
+#               'gender' =>  "necu da kazem!",\
+#               'inspirational_people' => '',\
+#               'languages' => '',\
+#               'data_vector' => '',\
+#               'timestamps' => ''}
 
-puts @db.collection('users').update({ 'graph_id' => '967156229980171' }, user_doc)
+# puts @db.collection('users').update({ 'graph_id' => '967156229980171' }, user_doc)
 
 #puts likes_2.include?( {"category"=>"Musician/band", "name"=>"Third Gallery", "created_time"=>"2013-09-04T18:48:30+0000", "id"=>"42648158335"} )
+
+  def record_fresh?(date_time)
+    time = DateTime.parse(date_time.to_s).to_time
+    time.to_i.between?(Time.now.to_i - (settings.record_active_days*24*60*60), Time.now.to_i)
+  end
+
+puts cosine_similarity([0, 0, 0, 1], [0, 0, 1, 0])
 
