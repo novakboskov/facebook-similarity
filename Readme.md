@@ -1,4 +1,4 @@
-Facebook/Heroku sample app -- Ruby
+Facebook/Heroku sample app -- Ruby Enhanced, finding similar users on Facebook
 ==================================
 
 This is a sample app showing use of the Facebook Graph API, written in Ruby, designed for deployment to [Heroku](http://www.heroku.com/).
