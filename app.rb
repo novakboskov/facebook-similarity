@@ -1,4 +1,4 @@
-require "sinatra"
+require 'sinatra'
 require 'koala'
 require 'mongo'
 include Mongo
@@ -9,12 +9,11 @@ require 'date'
 $stdout.sync = true
 
 configure do
-
   enable :sessions
   set :session_secret, 'something secret'
   set :raise_errors, true
   set :show_exceptions, false
-  set :long_lived_token_max_time, 259200
+  set :long_lived_token_max_time, 259_200
   set :record_active_days, 3
 
   # mongolab configuration
@@ -22,7 +21,6 @@ configure do
   db_name = mongo_uri[%r{/([^/\?]+)(\?|$)}, 1]
   client = MongoClient.from_uri(mongo_uri)
   set :db, client.db(db_name)
-
 end
 
 helpers Helpers
@@ -52,7 +50,7 @@ end
 
 # the facebook session expired! reset ours and restart the process
 error(Koala::Facebook::APIError) do
-  puts "ERROR IS " + env['sinatra.error'].message
+  puts 'ERROR IS ' + env['sinatra.error'].message
 
   if env['sinatra.error'].fb_error_code.to_s == '190'
     if env['sinatra.error'].fb_error_subcode.to_s == '466'
@@ -71,7 +69,7 @@ error(Koala::Facebook::APIError) do
     session[:access_token] = nil
     response.delete_cookie 'access_token'
     redirect '/'
-    
+
   else
     session[:access_token] = nil
     redirect "/auth/facebook"
