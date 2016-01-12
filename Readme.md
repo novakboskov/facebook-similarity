@@ -31,10 +31,3 @@ If you prefer to deploy yourself, push this code to a new Heroku app on the Ceda
     heroku config:add FACEBOOK_APP_ID=12345 FACEBOOK_SECRET=abcde
 
 Enter the URL for your Heroku app into the Website URL section of the Facebook app settings page, then you can visit your app on the web.
-
-Similarity improvements
------------------------
-
-### Data ###
-
-
